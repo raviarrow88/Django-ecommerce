@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+  <div class="product-container">
+      <div class="row my-3">
+        <div class="col-sm-7 col-md-7 ">
+          <div class="img-container">
+            <img class="prod-d-img" src="{% static 'assets/images/login2.jpg' %}" alt="">
+
+          </div>
+        </div>
+        <div class="col-sm-5 col-md-5 ">
+          <div class="prod-info">
+            <div class="prod-name-container">
+              <h1 class="text-center prod-name-header"> HP Laptop</h1>
+            </div>
+            <div class="prod-cost-container">
+              <h4 class="text-center container" style='color:blue;margin:20px 20px' >Rs 400</h4>
+            </div>
+
+          </div>
+
+          <div class="add-to-container d-btn">
+            <div class="btn-group " role="group" aria-label="">
+              <button type="button" class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i></button>
+              <input type="text" name="" value="0" readonly class='text-center' style="width:30px">
+              <button type="button" class="btn btn-secondary"><i class="fa fa-minus" aria-hidden="true"></i></button>
+            </div>
+
+            <div class="add-to-cart-btn d-inline d-btn">
+              <button class="btn btn-primary" type="" name="button">ADD TO CART</button>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+  </div>
+
+</div>
+
+{% endblock content %}
