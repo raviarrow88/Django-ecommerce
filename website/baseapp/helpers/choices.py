@@ -5,3 +5,8 @@ CATEGORY_CHOICES =(
 ('AR','APPAREL'),
 ('HH','HOUSEHOLD')
 )
+
+ADDRESS_TYPE = (
+('H','Home'),
+('O','Office')
+)
