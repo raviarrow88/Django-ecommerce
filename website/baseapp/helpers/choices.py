@@ -1,0 +1,7 @@
+
+
+CATEGORY_CHOICES =(
+('ET','ELECTRONICS'),
+('AR','APPAREL'),
+('HH','HOUSEHOLD')
+)
