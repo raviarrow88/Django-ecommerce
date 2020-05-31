@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from baseapp.views import login_cancel
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('baseapp.urls')),
+    path('accounts/social/login/cancelled/',login_cancel),
+    path('accounts/', include('allauth.urls')),
+
+
 ]
 
 if settings.DEBUG:

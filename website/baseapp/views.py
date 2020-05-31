@@ -1,5 +1,4 @@
-from django.shortcuts import render
-
+from django.shortcuts import render,redirect
 # Create your views here.
 
 
@@ -19,3 +18,6 @@ def store(request):
 def detail(request):
     context={}
     return render(request,"product_detail.html",context)
+
+def login_cancel(request):
+    return redirect("store")
