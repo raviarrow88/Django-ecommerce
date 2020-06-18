@@ -17,7 +17,16 @@
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
     <div class="form-inline mx-2 login-btn" role='group'>
+
+      {% if user.is_authenticated %}
+      <!-- <button type="button" class='btn btn-danger' name="button"  >Logout</button> -->
+
+      <a href="/accounts/logout/" class='btn btn-danger'>Logout</a>
+      {% else %}
       <button type="button" class='btn btn-danger' name="button" data-toggle="modal" data-target="#exampleModalCenter" data-keyboard="false" data-backdrop="static" >LogIn</button>
+      {% endif %}
+
+
       <div class="d-inline mx-2">
         <a class="d-inline" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
         <p class="d-inline p-0" id='cart-total' style="color:blue" >0</p>

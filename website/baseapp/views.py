@@ -24,4 +24,6 @@ def detail(request,id=None):
     return render(request,"product_detail.html",context)
 
 def login_cancel(request):
-    return redirect("store")
+    return redirect("SKART:store")
+
+#
