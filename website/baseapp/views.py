@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
+
 # Create your views here.
+from .models.item import Item
 
 
 
@@ -12,7 +14,8 @@ def checkout(request):
     return render(request,"checkout.html",context)
 
 def store(request):
-    context={}
+    items = Item.objects.all()
+    context={"items":items}
     return render(request,"store.html",context)
 
 def detail(request):

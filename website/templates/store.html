@@ -2,56 +2,36 @@
 {% load staticfiles %}
 {%  block content %}
 
-<div class="container">
+
+
+
+
+
+
+  <div class="container">
   <div class="row">
+    {% for item  in items %}
     <div class="col-lg-4">
       <div class="box-ele">
-        <img class='thumbnail' src="{% static 'assets/images/login.jpg' %}" alt="">
+        <img class='thumbnail' src="{{ item.image.url }}" alt="">
         <div class="add-cart">
           <button type="button" class="btn btn-info btn-sm add-cart-btn" name="button"><span class="btn-text">Add to cart</span> <i class="fa fa-cart-plus cart-icon" aria-hidden="true"></i> </button>
         </div>
-        <h6 class="product-name"><strong>Product</strong></h6>
+        <h6 class="product-name"><strong>{{item.name}}</strong></h6>
         <hr>
 
         <a href="#" class="btn btn-outline-success" >View Details</a>
-        <h4 style="display: inline-block; float: right"><strong>$20</strong></h4>
-      </div>
-
-    </div>
-    <div class="col-lg-4">
-      <div class="box-ele">
-        <img class='thumbnail' src="{% static 'assets/images/login2.jpg' %}" alt="">
-        <div class="add-cart">
-            <button type="button" class="btn btn-info btn-sm add-cart-btn" name="button"><span class="btn-text">Add to cart</span> <i class="fa fa-cart-plus cart-icon" aria-hidden="true"></i> </button>
-        </div>
-        <h6 class="product-name"><strong>Product</strong></h6>
-        <hr>
-
-        <a href="#" class="btn btn-outline-success" >View Details</a>
-        <h4 style="display: inline-block; float: right"><strong>$20</strong></h4>
-
+        <h4 style="display: inline-block; float: right"><strong>{{item.price }}</strong></h4>
       </div>
 
     </div>
 
-    <div class="col-lg-4">
-      <div class="box-ele">
-        <img class='thumbnail' src="{% static 'assets/images/login.jpg' %}" alt="">
-        <div class="add-cart">
-            <button type="button" class="btn btn-info btn-sm add-cart-btn" name="button"><span class="btn-text">Add to cart</span> <i class="fa fa-cart-plus cart-icon" aria-hidden="true"></i> </button>
-        </div>
-        <h6 class="product-name"><strong>Product</strong></h6>
-        <hr>
-
-        <a href="#" class="btn btn-outline-success" >View Details</a>
-        <h4 style="display: inline-block; float: right"><strong>$20</strong></h4>
-
-      </div>
-
-    </div>
-
-
+        {% endfor %}
   </div>
+
+
+
+
 
 
 </div>
