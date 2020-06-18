@@ -3,7 +3,9 @@ from .timestamp import TimeStamp
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
-
+from allauth.account.signals import user_signed_up
+from django.dispatch import receiver
+from allauth.socialaccount.signals import social_account_added
 
 class UserProfile(TimeStamp):
     """
@@ -20,5 +22,26 @@ class UserProfile(TimeStamp):
     fb_profile = models.URLField(max_length=255,null=True,blank=True,default=None)
     gmail_profile = models.URLField(max_length=255,null=True,blank=True,default=None)
 
+
     def __str__(self):
-        return str(self.user)
+        return str(self.id)
+
+
+
+@receiver(user_signed_up)
+def create_user_profile(request,user,sociallogin=None,**kwargs):
+    if sociallogin:
+        new_user = User.objects.get(email=user.email)
+        avatar_url = sociallogin.account.get_avatar_url()
+        user_profile,created = UserProfile.objects.get_or_create(user=new_user,avatar=avatar_url)
+        if sociallogin.account.provider =='google':
+            new_user = User.objects.filter(email=user.email)[0]
+            profile = UserProfile.objects.filter(user=new_user)[0]
+            profile.gmail_profile = sociallogin.account.get_profile_url()
+            profile.save()
+        elif sociallogin.account.provider =='facebook':
+            new_user = User.objects.filter(email=user.email)[0]
+            profile = UserProfile.objects.filter(user=new_user)[0]
+            print ("url",sociallogin.account.get_profile_url())
+            profile.fb_profile = sociallogin.account.get_profile_url()
+            profile.save()

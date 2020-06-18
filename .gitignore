@@ -9,3 +9,4 @@ venv/
 .idea/
 static_dev/
 static_cdn/
+db.sqlite3/
