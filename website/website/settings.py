@@ -190,7 +190,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'static_dev','assets','images')
 LOGIN_REDIRECT_URL ='/'
 
 
-# AUTH_PROFILE_MODULE = 'baseapp.user.UserProfile'
+AUTH_PROFILE_MODULE = 'baseapp.user.UserProfile'
 
 # SOCIALACCOUNT_EMAIL_VERIFICATION = 'optional'
 
