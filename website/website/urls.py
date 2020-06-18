@@ -21,10 +21,9 @@ from baseapp.views import login_cancel
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('baseapp.urls')),
+    path('',include(('baseapp.urls','app_name'),namespace='SKART')),
     path('accounts/social/login/cancelled/',login_cancel),
     path('accounts/', include('allauth.urls')),
-
 
 ]
 

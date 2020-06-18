@@ -6,17 +6,17 @@
       <div class="row my-3">
         <div class="col-sm-7 col-md-7 ">
           <div class="img-container">
-            <img class="prod-d-img" src="{% static 'assets/images/login2.jpg' %}" alt="">
-            
+            <img class="prod-d-img" src="{{ item.image.url }}" alt="">
+
           </div>
         </div>
         <div class="col-sm-5 col-md-5  pro-det">
           <div class="prod-info">
             <div class="prod-name-container">
-              <h1 class="text-center prod-name-header"> HP Laptop</h1>
+              <h1 class="text-center prod-name-header">{{ item.name }}</h1>
             </div>
             <div class="prod-cost-container">
-              <h4 class="text-center container" style='color:blue;margin:20px 20px' >Rs 400</h4>
+              <h4 class="text-center container" style='color:blue;margin:20px 20px'>{{item.price}}</h4>
             </div>
 
           </div>
