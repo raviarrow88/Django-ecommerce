@@ -1,7 +1,7 @@
 from django.db import models
 from .timestamp import TimeStamp
 from .item import Item
-from .user import UserProfile
+# from .user import UserProfile
 from .order import Order
 
 class OrderItem(TimeStamp):

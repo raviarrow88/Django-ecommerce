@@ -43,10 +43,12 @@ INSTALLED_APPS = [
 
     'django.contrib.sites',
     'baseapp',
+    'customer',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
 
     #providers
     'allauth.socialaccount.providers.facebook',
@@ -190,7 +192,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'static_dev','assets','images')
 LOGIN_REDIRECT_URL ='/'
 
 
-AUTH_PROFILE_MODULE = 'baseapp.user.UserProfile'
+AUTH_PROFILE_MODULE = 'customer.UserProfile'
+
+# AUTH_USER_MODEL = 'customer.UserProfile'
 
 # SOCIALACCOUNT_EMAIL_VERIFICATION = 'optional'
 

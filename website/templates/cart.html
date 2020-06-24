@@ -8,15 +8,17 @@
       <div class="cart-holder">
         <h2>Mycart</h2>
         <hr>
+        {% for item in items %}
+
         <div class="items-container">
           <div class="cart-items">
-            <img class="cart-pic" src="{% static 'assets/images/login2.jpg' %}" alt="">
+            <img class="cart-pic" src="{{ item.item.image.url }}" alt="">
             <div class="c-details">
               <div class="cart-prod-name">
-                <p>Product1 Name</p>
+                <p>{{item.item.name}}</p>
               </div>
               <div class="cart-prod-cost">
-                <p>Rs.200</p>
+                <p>{{ item.item.price }}</p>
               </div>
 
 
@@ -34,31 +36,9 @@
           <!-- <button type="button" name="button">Place Order</button> -->
         </div>
         <hr>
-        <div class="items-container">
-          <div class="cart-items">
-            <img class="cart-pic" src="{% static 'assets/images/login2.jpg' %}" alt="">
-            <div class="c-details">
-              <div class="cart-prod-name">
-                <p>Product1 Name</p>
-              </div>
-              <div class="cart-prod-cost">
-                <p>Rs.200</p>
-              </div>
+        {% endfor %}
 
 
-            </div>
-            <div class="" style='padding-left:320px;padding-top:20px'>
-              <div class="btn-group " role="group" aria-label="">
-                <button type="button" class="btn btn-secondary" style='border-radius:0px' ><i class="fa fa-plus" aria-hidden="true"></i></button>
-                <input type="text" name="" value="0" readonly class='text-center' style="width:30px">
-                <button type="button" class="btn btn-secondary" style='border-radius:0px'><i class="fa fa-minus" aria-hidden="true"></i></button>
-              </div>
-
-            </div>
-
-          </div>
-          <!-- <button type="button" name="button">Place Order</button> -->
-        </div>
       </div>
       <div class="" style="margin-top:20px;position:absolute;right:15px">
           <button type="button" class="btn btn-primary btn-lg" style="border-radius:0px" name="button"> PLACE ORDER <i class="fa fa-chevron-right" style="font-size:15px" aria-hidden="true"></i></button>

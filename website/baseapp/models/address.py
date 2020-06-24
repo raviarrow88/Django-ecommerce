@@ -1,7 +1,8 @@
 from django.db import models
 from .timestamp import TimeStamp
 from .item import Item
-from .user import UserProfile
+# from .user import UserProfile
+from customer.models import UserProfile
 from baseapp.helpers.choices import ADDRESS_TYPE
 from .order import Order
 
