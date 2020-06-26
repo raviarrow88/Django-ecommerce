@@ -10,7 +10,7 @@ def cart(request):
         user_id = request.user.id
         profile = UserProfile.objects.get(user__id=user_id)
         # print (profile)
-        order = Order.objects.filter(user=profile)[0]
+        order,created = Order.objects.get_or_create(user=profile)
         print(order)
         items = order.orderitem_set.all()
         # print (items)
