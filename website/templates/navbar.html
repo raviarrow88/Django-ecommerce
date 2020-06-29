@@ -10,12 +10,16 @@
       <li class="nav-item active">
         <a class="nav-link" id='home-lnk' href="{% url 'SKART:store' %}">Home <span class="sr-only">(current)</span></a>
       </li>
-    </ul>
 
-    
-    <form class="form-inline my-4 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    </form>
+
+    </ul>
+    <!-- <form class="form-inline my-4 my-lg-0">
+          <input class="form-control mr-sm-2 form-control-sm "   type="search"
+          placeholder="Search" aria-label="Search"> <span class="fa fa-search" > </span>
+
+    </form> -->
+
+
     <div class="form-inline mx-2 login-btn" role='group'>
 
       {% if user.is_authenticated %}
@@ -36,6 +40,13 @@
 
 
   </div>
+  <div class="input-group srch" >
+    <input class="form-control "  style="border-radius:0px" type="text" placeholder="Search">
+    <div class="input-group-append" >
+      <span class="input-group-text" style='border-radius:0px'><i class="fa fa-search fa-fw" ></i></span>
+    </div>
+  </div>
+
 </nav>
 
 
