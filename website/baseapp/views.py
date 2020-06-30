@@ -13,11 +13,10 @@ def cart(request):
         order,created = Order.objects.get_or_create(user=profile)
         print(order)
         items = order.orderitem_set.all()
-        # print (items)
-        # items=[]
+        context = {'items':items,'order':order}
     else:
         items=[]
-    context={'items':items}
+        context={'items':items}
     return render(request,"cart.html",context)
 
 def checkout(request):

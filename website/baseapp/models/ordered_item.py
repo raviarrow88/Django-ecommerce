@@ -12,3 +12,7 @@ class OrderItem(TimeStamp):
 
     def __str__(self):
         return str(self.id)
+
+    @property
+    def total_value(self):
+        return self.quantity * self.item.price
