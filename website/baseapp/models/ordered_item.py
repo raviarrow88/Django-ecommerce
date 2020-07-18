@@ -8,7 +8,7 @@ class OrderItem(TimeStamp):
     order = models.ForeignKey(Order,on_delete=models.SET_NULL,null=True,blank=True)
     item = models.ForeignKey(Item,on_delete=models.SET_NULL,null=True,blank=True)
     ordered = models.BooleanField(default=False)
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.id)

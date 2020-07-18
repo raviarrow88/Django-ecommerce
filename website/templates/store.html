@@ -10,7 +10,7 @@
       <div class="box-ele">
         <img class='thumbnail' src="{{ item.image.url }}" alt="">
         <div class="add-cart">
-          <button type="button" class="btn btn-info btn-sm add-cart-btn" name="button"><span class="btn-text">Add to cart</span> <i class="fa fa-cart-plus cart-icon" aria-hidden="true"></i> </button>
+          <button  data-product="{{item.id}}" data-action='add' type="button" class="btn btn-info btn-sm add-cart-btn update-cart" name="button"><span class="btn-text">Add to cart</span> <i class="fa fa-cart-plus cart-icon" aria-hidden="true"></i> </button>
         </div>
         <h6 class="product-name"><strong>{{item.name}}</strong></h6>
         <hr>
