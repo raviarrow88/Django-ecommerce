@@ -16,9 +16,12 @@ def cart(request):
         profile = UserProfile.objects.get(user__id=user_id)
         # print (profile)
         order,created = Order.objects.get_or_create(user=profile)
-        print(order)
+
         items = order.orderitem_set.all()
-        context = {'items':items,'order':order}
+
+        cart_value = order.orderitem_set.all().count()
+
+        context = {'items':items,'order':order,'cart_value':cart_value}
     else:
         items=[]
         context={'items':items}
@@ -30,8 +33,22 @@ def checkout(request):
     return render(request,"checkout.html",context)
 
 def store(request):
-    items = Item.objects.all()
-    context={"items":items}
+    if request.user.is_authenticated:
+        user_id = request.user.id
+        profile = UserProfile.objects.get(user__id=user_id)
+        # print (profile)
+        order,created = Order.objects.get_or_create(user=profile)
+        items = Item.objects.all()
+
+
+        cart_value = order.orderitem_set.all().count()
+
+        context = {'store_items':items,'cart_value':cart_value}
+    else:
+        items=[]
+        context={'store_items':items,'cart_value':0}
+
+
     return render(request,"store.html",context)
 
 def detail(request,id=None):
@@ -46,6 +63,7 @@ def login_cancel(request):
 def update_cart_items(request):
     if request.user.is_authenticated:
         data = json.loads(request.body)
+        print (data)
         user_id = request.user.id
         profile = UserProfile.objects.get(user__id=user_id)
         # print (profile)
@@ -55,8 +73,16 @@ def update_cart_items(request):
         order=order,
         item=Item.objects.get(id=data['product_id']),
         )
-        order_item.quantity +=1
+
+        if data['action'] == 'add':
+            order_item.quantity +=1
+        elif data['action'] == 'remove':
+            order_item.quantity -=1
+
+
         order_item.save()
 
+        if order_item.quantity <= 0:
+            order_item.delete()
 
     return JsonResponse({"message":"Cart Updated SuccessFully"})

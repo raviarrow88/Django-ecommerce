@@ -25,9 +25,9 @@
             </div>
             <div class="" style='padding-left:320px;padding-top:20px'>
               <div class="btn-group " role="group" aria-label="">
-                <button type="button" class="btn btn-secondary" style='border-radius:0px' ><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <button type="button" data-product="{{item.item.id}}" data-action='add' class="btn btn-secondary update-cart" style='border-radius:0px' ><i class="fa fa-plus" aria-hidden="true"></i></button>
                 <input type="text" name="" value={{item.quantity}} readonly class='text-center' style="width:30px">
-                <button type="button" class="btn btn-secondary" style='border-radius:0px'><i class="fa fa-minus" aria-hidden="true"></i></button>
+                <button type="button" data-product="{{item.item.id}}" data-action='remove' class="btn btn-secondary update-cart" style='border-radius:0px'><i class="fa fa-minus" aria-hidden="true"></i></button>
               </div>
 
             </div>
