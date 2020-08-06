@@ -19,7 +19,8 @@ def cart(request):
 
         items = order.orderitem_set.all()
 
-        cart_value = order.orderitem_set.all().count()
+        cart_value = sum([item.quantity for item in items])
+
 
         context = {'items':items,'order':order,'cart_value':cart_value}
     else:
@@ -41,9 +42,11 @@ def store(request):
         items = Item.objects.all()
 
 
-        cart_value = order.orderitem_set.all().count()
+        cart_items = order.orderitem_set.all()
 
-        context = {'store_items':items,'cart_value':cart_value}
+        val = sum([item.quantity for item in cart_items])
+
+        context = {'store_items':items,'cart_value':val}
     else:
         items=[]
         context={'store_items':items,'cart_value':0}
@@ -66,7 +69,7 @@ def update_cart_items(request):
         print (data)
         user_id = request.user.id
         profile = UserProfile.objects.get(user__id=user_id)
-        # print (profile)
+
         order,created = Order.objects.get_or_create(user=profile)
 
         order_item,created= OrderItem.objects.get_or_create(
@@ -80,9 +83,15 @@ def update_cart_items(request):
             order_item.quantity -=1
 
 
+
         order_item.save()
+
+        items = order.orderitem_set.all()
+
+        val = sum([item.quantity for item in items])
+
 
         if order_item.quantity <= 0:
             order_item.delete()
 
-    return JsonResponse({"message":"Cart Updated SuccessFully"})
+    return JsonResponse({"message":"Cart Updated SuccessFully","cart_value":val})
