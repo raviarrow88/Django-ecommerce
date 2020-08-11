@@ -14,7 +14,7 @@ class UserProfile(TimeStamp):
     It is connected to django User model with a OneToOneField.
     """
     user = models.OneToOneField(User,related_name='user',on_delete=models.CASCADE)
-    avatar = models.URLField(max_length=100,blank=True,null=True)
+    avatar = models.URLField(max_length=255,blank=True,null=True)
     phone_regex = RegexValidator(regex=r'^\+?([0,7,8,9]{1})}?\d{9,12}$',
                                  message="Phone number must be entered in the format: '9848281223'. Up to 11 digits allowed.")
 

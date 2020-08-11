@@ -51,38 +51,14 @@
       </div>
     </div>
 
-    {% if order %}
+
     <div class="col-4">
-        <div class='cart-details'>
-          <div class="price-detail-header">
-            <h3>Price Details</h3>
-          </div>
-          <hr>
-          <div class="price-container">
-            <div class="items p-det">
-              Items
-              <span>{{ order.get_no_items }}</span>
-            </div>
-            <div class="price p-det">
-              Price
-              <span>{{ order.get_total_order_price }}</span>
-            </div>
-            <div class="del-fee p-det">
-              Delivery Fee
-              <span>{{ order.get_delivery_fee }}</span>
-            </div>
-            <hr>
-            <div class="p-det">
-              <h4>Total Price</h4>
-              <span><h4> {{ order.get_cart_total }}</h4></span>
-            </div>
-          </div>
-
-
-
-      </div>
+      {% if order %}
+          {% include 'items_card.html' %}
+      {% endif %}
     </div>
-    {% endif %}
+
+
   </div>
 
 

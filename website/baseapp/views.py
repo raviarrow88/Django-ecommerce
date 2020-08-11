@@ -28,9 +28,21 @@ def cart(request):
         context={'items':items}
     return render(request,"cart.html",context)
 
-def checkout(request):
 
-    context={}
+from baseapp.models.address import Address
+
+def checkout(request):
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user__id=request.user.id)
+
+        address = Address.objects.filter(user=profile)
+
+        order,created = Order.objects.get_or_create(user=profile)
+
+        context = {'address':address,'order':order}
+
+    else:
+        context={}
     return render(request,"checkout.html",context)
 
 def store(request):

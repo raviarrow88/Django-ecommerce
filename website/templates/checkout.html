@@ -3,7 +3,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-8">
+    <div class="col-8 col-sm-8 col-md-8 col-ls-8">
       <div class="address cart-holder">
         <h4>Address</h4>
         <form>
@@ -59,7 +59,7 @@
       </div>
 
     </div>
-    <div class="col-4 cart-holder">
+    <div class="col-4  col-sm-4 col-md-4 col-ls-4 cart-holder">
       <div class="order-details">
 
         <div class='' style="padding:30px">
@@ -91,6 +91,27 @@
 
 
       </div>
+      </div>
+
+    </div>
+
+    <div class="col-8 col-sm-8 col-md-8">
+      <div class="cart-holder">
+        {% for add in  address %}
+            <div class="add_holder">
+              <div class="add_section">
+                <input type="radio" name="" value="">
+                {{add.get_address_type_display}}
+                {{ add.user.phone_number }}
+                {{ add.street_address}}
+                {{add.apartment_address}}
+                {{add.zipcode}}
+              </div>
+            </div>
+            <hr>
+        {% empty %}
+            <p>Add New address</p>
+        {% endfor %}
       </div>
 
     </div>
