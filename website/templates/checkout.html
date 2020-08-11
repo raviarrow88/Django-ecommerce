@@ -59,56 +59,29 @@
       </div>
 
     </div>
-    <div class="col-4  col-sm-4 col-md-4 col-ls-4 cart-holder">
-      <div class="order-details">
-
-        <div class='' style="padding:30px">
-          <div class="price-detail-header">
-            <h3>Order Details</h3>
-          </div>
-          <hr>
-          <div class="price-container">
-            <div class="price p-det">
-              Price
-              <span>Rs.123</span>
-            </div>
-            <div class="del-fee p-det">
-              Items
-              <span>2</span>
-            </div>
-            <div class="del-fee p-det">
-              Delivery Fee
-              <span>Rs.40</span>
-            </div>
-
-            <hr>
-            <div class="p-det">
-              <h4>Total Price</h4>
-              <span><h4>Rs.167</h4></span>
-            </div>
-          </div>
-
-
-
-      </div>
-      </div>
-
+    <div class="col-4  col-sm-4 col-md-4 col-ls-4 ">
+        {% include 'items_card.html' %}
     </div>
 
     <div class="col-8 col-sm-8 col-md-8">
       <div class="cart-holder">
+        <div class="header">
+          <h4>Saved Address</h4>
+        </div>
         {% for add in  address %}
             <div class="add_holder">
-              <div class="add_section">
-                <input type="radio" name="" value="">
-                {{add.get_address_type_display}}
-                {{ add.user.phone_number }}
+              <div class="add_section cart-holder ">
+                <span><p><input type="radio" name="" value="{{add.id}}">
+                {{add.get_address_type_display}}</p></span>
+                {{ add.user.phone_number }},
                 {{ add.street_address}}
                 {{add.apartment_address}}
                 {{add.zipcode}}
+
               </div>
+
             </div>
-            <hr>
+
         {% empty %}
             <p>Add New address</p>
         {% endfor %}
