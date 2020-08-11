@@ -7,6 +7,5 @@ env/
 venv/
 **/migrations/00*
 .idea/
-static_dev/
 static_cdn/
 db.sqlite3/

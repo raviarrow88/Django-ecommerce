@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+
+{% block headextra %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock headextra %}
 {%  block content %}
 
 <div class="container">
@@ -40,8 +44,10 @@
 
 
       </div>
-      <div class="" style="margin-top:20px;position:absolute;right:15px">
-          <button type="button" class="btn btn-primary btn-lg" style="border-radius:0px" name="button"> PLACE ORDER <i class="fa fa-chevron-right" style="font-size:15px" aria-hidden="true"></i></button>
+      <div class="ct_btns" style="margin-top:20px">
+          <button type="button" class="btn btn-primary btn-lg" style="border-radius:0px" name="button"> <a id='pl_order' href="{% url 'SKART:store' %}" style='color:white'><i class="fa fa-chevron-left" style="font-size:15px" aria-hidden="true"></i> CONTINUE SHOPPING </a> </button>
+          <button type="button" class="btn btn-primary btn-lg" style="border-radius:0px" name="button"> <a id='pl_order' href="{% url 'SKART:checkout' %}" style='color:white'>PLACE ORDER <i class="fa fa-chevron-right" style="font-size:15px" aria-hidden="true"></i></a> </button>
+
       </div>
     </div>
 
