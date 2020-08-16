@@ -10,6 +10,11 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+
+
+
+
+
 def cart(request):
     if request.user.is_authenticated:
         user_id = request.user.id
@@ -33,13 +38,14 @@ from baseapp.models.address import Address
 
 def checkout(request):
     if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user__id=request.user.id)
+        user_id = request.user.id
+        res = get_cart_value(user_id)
+        profile = UserProfile.objects.get(user__id=user_id)
 
         address = Address.objects.filter(user=profile)
 
-        order,created = Order.objects.get_or_create(user=profile)
 
-        context = {'address':address,'order':order}
+        context = {'address':address,'order':res[0],'cart_value':res[1]}
 
     else:
         context={}
@@ -48,17 +54,9 @@ def checkout(request):
 def store(request):
     if request.user.is_authenticated:
         user_id = request.user.id
-        profile = UserProfile.objects.get(user__id=user_id)
-        # print (profile)
-        order,created = Order.objects.get_or_create(user=profile)
+        res = get_cart_value(user_id)
         items = Item.objects.all()
-
-
-        cart_items = order.orderitem_set.all()
-
-        val = sum([item.quantity for item in cart_items])
-
-        context = {'store_items':items,'cart_value':val}
+        context = {'store_items':items,'cart_value':res[1]}
     else:
         items=[]
         context={'store_items':items,'cart_value':0}
@@ -67,12 +65,29 @@ def store(request):
     return render(request,"store.html",context)
 
 def detail(request,id=None):
+    res = get_cart_value(request.user.id)
     item_instance= get_object_or_404(Item,id=id)
-    context={"item":item_instance}
+
+    context={"item":item_instance,'cart_value':res[1]}
     return render(request,"product_detail.html",context)
 
 def login_cancel(request):
     return redirect("SKART:store")
+
+
+def get_cart_value(user_id):
+    profile = UserProfile.objects.get(user__id=user_id)
+    # print (profile)
+    order,created = Order.objects.get_or_create(user=profile)
+
+    items = order.orderitem_set.all()
+
+    cart_value = sum([item.quantity for item in items])
+
+    return order,cart_value
+
+
+
 
 @csrf_exempt
 def update_cart_items(request):
