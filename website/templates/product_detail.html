@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% block headextra %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock headextra %}
 {% block content %}
 <div class="container">
   <div class="product-container">
@@ -13,18 +16,24 @@
         <div class="col-sm-5 col-md-5  pro-det">
           <div class="prod-info">
             <div class="prod-name-container">
-              <h1 class="text-center prod-name-header">{{ item.name }}</h1>
+              <h2 class= prod-name-header">{{ item.name }}</h2>
             </div>
-            <div class="prod-cost-container">
-              <h4 class="text-center container" style='color:blue;margin:20px 20px'>{{item.price}}</h4>
+            <hr>
+            <div class="prod-cost-container" >
+              <h4 class=" container" style='color:blue;padding:0px;'>&#8377;{{item.price}}</h4>
             </div>
 
-          </div>
-
-  
-            <div class="add-to-cart-btn d-inline d-btn">
+            <div class="description-section">
+              <p class='cont_header'>Description</p>
+              <p class='content'>{{item.description}}</p>
+            </div>
+            <div class="add-to-cart-btn  d-btn ">
               <button class="btn btn-primary update-cart" data-product="{{item.id}}" data-action='add' type="" name="button">ADD TO CART</button>
             </div>
+          </div>
+
+
+
 
           </div>
 
