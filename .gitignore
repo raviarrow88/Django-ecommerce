@@ -8,4 +8,4 @@ venv/
 **/migrations/00*
 .idea/
 static_cdn/
-db.sqlite3/
+db.sqlite3
