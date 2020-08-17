@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% block headextra %}
 <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+<script type="text/javascript" src="{% static 'js/product_detail.js' %}" ></script>
 {% endblock headextra %}
 {% block content %}
 <div class="container">
@@ -9,7 +10,7 @@
       <div class="row my-3">
         <div class="col-sm-7 col-md-7 ">
           <div class="img-container">
-            <img class="prod-d-img" src="{{ item.image.url }}" alt="">
+            <img class="prod-d-img" src="{{ item.productimage_set.all.0.image.url }}" alt="">
 
           </div>
         </div>
@@ -33,11 +34,29 @@
           </div>
 
 
-
-
           </div>
 
 
+
+        </div>
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="slider_wrapper">
+              <i class="fa fa-arrow-circle-left side_icon" id='slideLeft'></i>
+
+            <div id="slider">
+
+
+            {% for pimage in item.productimage_set.all %}
+                <img  class='thumbnail' src="{{pimage.image.url }}" alt="">
+            {% endfor %}
+
+
+
+            </div>
+            <i class="fa fa-arrow-circle-right side_icon" id='slideRight' ></i>
+
+          </div>
 
         </div>
 
