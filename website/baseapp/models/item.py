@@ -13,3 +13,12 @@ class Item(TimeStamp):
 
     def __str__(self):
         return str(self.id)
+
+
+class ProductImage(TimeStamp):
+    item = models.ForeignKey(Item,on_delete=models.CASCADE)
+    image = models.ImageField()
+    name= models.CharField(max_length=255)
+
+    def __str__(self):
+        return str(self.item.id)+'-'+str(self.name)
