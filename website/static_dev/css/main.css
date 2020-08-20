@@ -48,9 +48,6 @@ body{
   margin-left: 25px;
 }
 
-a#home-lnk:hover {
-  color:blue;
-}
 
 .box-ele{
 	box-shadow:hsl(0, 0%, 80%) 0 0 16px;

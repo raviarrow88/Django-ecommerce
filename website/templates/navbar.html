@@ -1,7 +1,12 @@
 {% block content %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+{% load static %}
+{% block headextra %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+{% endblock headextra %}
+<nav class="navbar navbar-expand-lg ">
 
-  <a class="navbar-brand" href="{% url 'SKART:store' %}">BuyIt</a>
+  <!-- <a class="navbar-brand" href="{% url 'SKART:store' %}">BuyIt</a> -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,44 +14,47 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" id='home-lnk' href="{% url 'SKART:store' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link " style='color:black' id='home-lnk' href="{% url 'SKART:store' %}">RCart <span class="sr-only">(current)</span></a>
       </li>
+      <ul class="navbar-nav mr-auto header_menu" >
+        <li class="nav-item offset-6"><a class="nav-link nav-font" href="{% url 'SKART:store' %}">Home</a></li>
+        <li class="nav-item offset-2"><a class="nav-link nav-font" href="#">Categories</a></li>
+        <li class="nav-item offset-2"><a class="nav-link nav-font" href="#">Contact</a></li>
+      </ul>
 
 
     </ul>
-    <!-- <form class="form-inline my-4 my-lg-0">
-          <input class="form-control mr-sm-2 form-control-sm "   type="search"
-          placeholder="Search" aria-label="Search"> <span class="fa fa-search" > </span>
-
-    </form> -->
 
 
-    <div class="form-inline mx-2 login-btn" role='group'>
+    </div>
+
+
+    <div class=" mx-2 login-btn" role='group'>
 
       {% if user.is_authenticated %}
       <!-- <button type="button" class='btn btn-danger' name="button"  >Logout</button> -->
 
-      <a href="/accounts/logout/" class='btn btn-danger'>Logout</a>
+      <a href="/accounts/logout/" class='btn btn-dark'>Logout</a>
       {% else %}
-      <button type="button" class='btn btn-danger' name="button" data-toggle="modal" data-target="#exampleModalCenter" data-keyboard="false" data-backdrop="static" >LogIn</button>
+      <button type="button" class='btn btn-outline-dark' name="button" data-toggle="modal" data-target="#exampleModalCenter" data-keyboard="false" data-backdrop="static" >LogIn/Register</button>
       {% endif %}
 
 
       <div class="d-inline mx-2">
-        <a class="d-inline" href="{% url 'SKART:cart' %}"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-        <div class="d-inline p-0" id='cart-total' style="color:blue" >{{ cart_value }}</div>
+        <a class="d-inline" href="{% url 'SKART:cart' %}" style='color:black;font-size:20px'><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+        <div class="d-inline p-0" id='cart-total'  >{{ cart_value }}</div>
       </div>
 
     </div>
 
 
-  </div>
-  <div class="input-group srch" >
+
+  <!-- <div class="input-group srch" >
     <input class="form-control "  style="border-radius:0px" type="text" placeholder="Search">
     <div class="input-group-append" >
       <span class="input-group-text" style='border-radius:0px'><i class="fa fa-search fa-fw" ></i></span>
     </div>
-  </div>
+  </div> -->
 
 </nav>
 
