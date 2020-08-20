@@ -7,6 +7,7 @@ from baseapp.helpers.choices import ADDRESS_TYPE
 from .order import Order
 
 class Address(TimeStamp):
+    title = models.CharField(max_length=255,default='home')
     user = models.ForeignKey(UserProfile,on_delete=models.SET_NULL,null=True,blank=True)
     order = models.ForeignKey(Order,on_delete=models.SET_NULL,null=True,blank=True)
     street_address = models.CharField(max_length=250,null=False)
