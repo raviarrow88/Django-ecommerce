@@ -63,7 +63,7 @@ body{
 .thumbnail{
   opacity: 1;
 	width: 100%;
-	height: 200px;
+	height: 310px;
 	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
     -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
     box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
@@ -81,6 +81,16 @@ body{
   text-align: center;
 }
 
+.product-name{
+  text-align: center;
+}
+
+.product-name:nth-of-type(1){
+  text-align: center;
+  font-weight: normal !important;
+  font-size: 20px !important;
+}
+
 
 
 .box-ele:hover .thumbnail {
@@ -91,11 +101,11 @@ body{
   opacity: 1;
 }
 
-.cart-icon{
+/* .cart-icon{
   display: none;
-}
+} */
 
-.add-cart-btn:hover i{
+/* .add-cart-btn:hover i{
   display: block;
   padding :4px 27px;
   transition: .5s ease;
@@ -103,7 +113,7 @@ body{
 .add-cart-btn:hover span{
   display: none;
 
-}
+} */
 
 
 /* .cart-icon:hover {
