@@ -8,13 +8,30 @@
 <div class="container">
   <div class="product-container">
       <div class="row my-3">
-        <div class="col-sm-7 col-md-7 ">
-          <div class="img-container">
-            <img class="prod-d-img" src="{{ item.productimage_set.all.0.image.url }}" alt="">
+        <div class="">
+          <div class="slider_wrapper">
+
+
+          <div id="slider">
+
+
+          {% for pimage in item.productimage_set.all %}
+              <img  class='thumbnail' src="{{pimage.image.url }}" alt="">
+          {% endfor %}
+
+
 
           </div>
+
         </div>
-        <div class="col-sm-5 col-md-5  pro-det">
+        </div>
+        <div class="col-6 col-sm-6 col-md-6 ">
+
+          <div class="img-container">
+            <img class="prod-d-img" src="{{ item.productimage_set.all.0.image.url }}" alt="">
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-4  pro-det">
           <div class="prod-info">
             <div class="prod-name-container">
               <h2 class= prod-name-header">{{ item.name }}</h2>
@@ -40,23 +57,7 @@
 
         </div>
         <div class="row">
-          <div class="col-sm-7">
-            <div class="slider_wrapper">
-              <i class="fa fa-arrow-circle-left side_icon" id='slideLeft'></i>
 
-            <div id="slider">
-
-
-            {% for pimage in item.productimage_set.all %}
-                <img  class='thumbnail' src="{{pimage.image.url }}" alt="">
-            {% endfor %}
-
-
-
-            </div>
-            <i class="fa fa-arrow-circle-right side_icon" id='slideRight' ></i>
-
-          </div>
 
         </div>
 

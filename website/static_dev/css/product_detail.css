@@ -15,19 +15,19 @@
 			max-height: 100px;
 			cursor: pointer;
 			opacity: 0.5;
-			margin: 5px;
+			margin: 10px;
 			border: 2px solid black;
 }
 
 #slider{
-  width: 500px;
-			display: flex;
+  width: 100px;
+			/* display: flex; */
 			flex-wrap: nowrap;
-			overflow-x: auto;
+			/* overflow-y: auto; */
 }
 
 .slider_wrapper{
-  max-width: 500px;
+    max-width: 500px;
 			display: flex;
 			min-height: 100px;
 			align-items: center;
@@ -38,9 +38,9 @@
 			opacity:1;
 		}
 
-    .active{
-  			opacity: 1;
-  		}
+.active{
+  		opacity: 0.5;
+  	}
 
 
 .side_icon{
