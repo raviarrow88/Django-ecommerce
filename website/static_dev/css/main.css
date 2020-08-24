@@ -115,13 +115,17 @@ body{
 
 } */
 
+.cart-icon:hover{
+  transform: rotate(360deg);
+   -webkit-transform: rotate(360deg);
+   color:#999 !important
+}
 
-/* .cart-icon:hover {
-  opacity: 1;
+.cart-icon{
+  transition-duration: 0.8s;
+  transition-delay: 0.5s;
 
-}  */
-
-
+}
 .product-name{
   margin-top: 10px;
 }
