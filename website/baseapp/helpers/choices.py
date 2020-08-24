@@ -1,12 +1,13 @@
 
 
 CATEGORY_CHOICES =(
-('ET','ELECTRONICS'),
-('AR','APPAREL'),
-('HH','HOUSEHOLD')
+('ELECTRONICS','ELECTRONICS'),
+('APPAREL','APPAREL'),
+('HOUSEHOLD','HOUSEHOLD')
 )
 
 ADDRESS_TYPE = (
-('H','Home'),
-('O','Office')
+('Home','Home'),
+('Office','Office'),
+('Other','Other')
 )

@@ -4,6 +4,17 @@
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 {% endblock headextra %}
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#catgory_sec').hover(function() {
+      if ($('#user-menu-dropdown').css('display')=='none') $('#user-menu-dropdown').addClass('visible');
+      else  $('#user-menu-dropdown').removeClass('visible')
+
+    });
+  });
+</script>
+
 <nav class="navbar navbar-expand-lg ">
 
   <!-- <a class="navbar-brand" href="{% url 'SKART:store' %}">BuyIt</a> -->
@@ -18,7 +29,23 @@
       </li>
       <ul class="navbar-nav mr-auto header_menu" >
         <li class="nav-item offset-6"><a class="nav-link nav-font" href="{% url 'SKART:store' %}">Home</a></li>
-        <li class="nav-item offset-2"><a class="nav-link nav-font" href="#">Categories</a></li>
+
+        <li class="nav-item offset-2" id='catgory_sec'>
+
+          <a class="nav-link nav-font" href="#">
+
+        <span>Categories<i class="fa fa-chevron-down cdown_icon" aria-hidden="true"></i> </span>
+            </a>
+
+            <div id="user-menu-dropdown">
+              <div class='drop_ele'>
+                <a href="#"  style='color:#7b7f84;font-size:small'> APPARELS </a>
+              </div>
+              <div class='drop_ele' >
+                <a href="#" style='color:#7b7f84;font-size:small'> ELECTRONICS </a>
+              </div>
+            </div>
+        </li>
         <li class="nav-item offset-2"><a class="nav-link nav-font" href="#">Contact</a></li>
       </ul>
 
