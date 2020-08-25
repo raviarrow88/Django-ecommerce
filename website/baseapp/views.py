@@ -14,7 +14,6 @@ import json
 
 
 
-
 def cart(request):
     if request.user.is_authenticated:
         user_id = request.user.id
@@ -122,3 +121,11 @@ def update_cart_items(request):
             order_item.delete()
 
     return JsonResponse({"message":"Cart Updated SuccessFully","cart_value":val})
+
+
+from .forms import ContactForm
+
+def contact(request):
+    form = ContactForm()
+    context={'form':form}
+    return render(request,'contact.html',context)

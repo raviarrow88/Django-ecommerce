@@ -1,0 +1,38 @@
+.contact_container{
+  padding:10px;
+}
+
+
+.map_section{
+  padding:20px;
+}
+.send_mss_btn{
+  border-radius: 50px;
+  background-color: #007bff !important;
+  color:white;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.fa {
+  color:#007bff;
+}
+
+.header h2{
+  text-transform: uppercase;
+    font-weight: 600;
+}
+
+#msg_header{
+  text-transform: uppercase;
+  font-weight: 400
+}
+
+.h_fields{
+  font-weight: 100;
+  font-size:20px
+}
+
+.h_text{
+  color:#90908a
+}

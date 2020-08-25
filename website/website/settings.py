@@ -48,13 +48,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'bootstrapform',
 
 
     #providers
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
 
-    #breadcrumbs 
+    #breadcrumbs
     "django_bootstrap_breadcrumbs",
 
 

@@ -6,7 +6,7 @@ class Contact(TimeStamp):
     name = models.CharField(max_length=255)
     phone_regex = RegexValidator(regex=r'^\+?([0,7,8,9]{1})}?\d{9,12}$',
                                  message="Phone number must be entered in the format: '9848281223'. Up to 11 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex],max_length=10,verbose_name='User phone number',null=True,blank=True)
+    phone_number = models.CharField(validators=[phone_regex],max_length=10,verbose_name='Phone Number',null=True,blank=True)
     message = models.TextField()
 
 

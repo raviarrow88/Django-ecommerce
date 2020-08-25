@@ -5,6 +5,7 @@ defusedxml==0.6.0
 Django==2.2
 django-allauth==0.41.0
 django-bootstrap-breadcrumbs==0.9.2
+django-bootstrap-form==3.4
 django-debug-toolbar==2.2
 django-shortcuts==1.6
 idna==2.9
