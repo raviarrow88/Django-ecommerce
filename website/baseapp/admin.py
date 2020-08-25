@@ -6,7 +6,7 @@ from .models.item import Item,ProductImage,Category
 from .models.address import Address
 from .models.order import Order
 from .models.ordered_item import OrderItem
-
+from .models.contact import Contact
 # admin.site.register(UserProfile)
 admin.site.register(Item)
 admin.site.register(Order)
@@ -14,3 +14,4 @@ admin.site.register(Address)
 admin.site.register(OrderItem)
 admin.site.register(ProductImage)
 admin.site.register(Category)
+admin.site.register(Contact)
