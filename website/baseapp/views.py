@@ -124,8 +124,20 @@ def update_cart_items(request):
 
 
 from .forms import ContactForm
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 def contact(request):
-    form = ContactForm()
+    if request.method=='POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Message Sent SuccessFully')
+            return HttpResponseRedirect(reverse('SKART:contact'))
+    else:
+        form = ContactForm()
+
     context={'form':form}
+
     return render(request,'contact.html',context)
