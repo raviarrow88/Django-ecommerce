@@ -129,6 +129,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 
 def contact(request):
+    res = get_cart_value(request.user.id)
     if request.method=='POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -138,6 +139,6 @@ def contact(request):
     else:
         form = ContactForm()
 
-    context={'form':form}
+    context={'form':form,'cart_value':res[1]}
 
     return render(request,'contact.html',context)

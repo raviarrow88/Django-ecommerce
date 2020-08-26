@@ -1,6 +1,6 @@
 from django.db import models
 from .timestamp import TimeStamp
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator,EmailValidator
 
 class Contact(TimeStamp):
     name = models.CharField(max_length=255)
@@ -8,6 +8,7 @@ class Contact(TimeStamp):
                                  message="Phone number must be entered in the format: '9848281223'. Up to 11 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex],max_length=10,verbose_name='Phone Number',null=True,blank=True)
     message = models.TextField()
+    email = models.EmailField(max_length=100,verbose_name='Email')
 
 
     def __str__(self):
