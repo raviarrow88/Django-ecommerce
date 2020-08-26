@@ -10,6 +10,7 @@ class Category(TimeStamp):
         return str(self.choices)
 
 
+
 class Item(TimeStamp):
     name = models.CharField(max_length=255,null=True,blank=True)
     price = models.DecimalField(max_digits=30,decimal_places=2,null=True)
@@ -21,6 +22,15 @@ class Item(TimeStamp):
     def __str__(self):
         return str(self.id)
 
+    def to_dict(self):
+        data = {
+        "name":self.name,
+        "price":self.price,
+        "category": self.category.choices if self.category else None,
+        "description":self.description,
+        "images":[ i.image.url for i in self.productimage_set.all() ]
+        }
+        return data
 
 class ProductImage(TimeStamp):
     item = models.ForeignKey(Item,on_delete=models.CASCADE)

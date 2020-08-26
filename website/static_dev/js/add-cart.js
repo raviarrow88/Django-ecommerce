@@ -12,12 +12,12 @@ for(i=0;i < items.length;i++ ) {
   })
 }
 
-function update_or_create_cart(product_id,action) {
+async function update_or_create_cart(product_id,action) {
   // console.log(product_id,action)
 
   data ={"product_id":product_id,"action":action}
 
-  fetch('/update_cart/',{
+await  fetch('/update_cart/',{
     method:'POST',
     headers: {
     'Content-Type': 'application/json'},

@@ -123,10 +123,12 @@ def update_cart_items(request):
     return JsonResponse({"message":"Cart Updated SuccessFully","cart_value":val})
 
 
+
 from .forms import ContactForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+
 
 def contact(request):
     res = get_cart_value(request.user.id)
@@ -142,3 +144,15 @@ def contact(request):
     context={'form':form,'cart_value':res[1]}
 
     return render(request,'contact.html',context)
+
+@csrf_exempt
+def get_category_data(request):
+
+    cat_type = request.GET.get('type')
+
+    items = Item.objects.filter(category__choices=cat_type)
+    data = {
+    "data":[i.to_dict() for i in items]
+    }
+
+    return JsonResponse(data)
