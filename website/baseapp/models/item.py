@@ -24,6 +24,7 @@ class Item(TimeStamp):
 
     def to_dict(self):
         data = {
+        "id":self.id,
         "name":self.name,
         "price":self.price,
         "category": self.category.choices if self.category else None,

@@ -54,7 +54,12 @@ def store(request):
     if request.user.is_authenticated:
         user_id = request.user.id
         res = get_cart_value(user_id)
+
+        query = request.GET.get('type')
+        if query:
+            items = Item.objects.filter(category__choices=query)
         items = Item.objects.all()
+
         context = {'store_items':items,'cart_value':res[1]}
     else:
         items=[]
