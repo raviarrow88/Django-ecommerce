@@ -55,7 +55,7 @@ def store(request):
         user_id = request.user.id
         res = get_cart_value(user_id)
 
-        query = request.GET.get('c')
+        query = request.GET.get('category')
         print (query)
         if query:
             items = Item.objects.filter(category__choices=query)
@@ -157,15 +157,15 @@ from django.template.loader import render_to_string
 @csrf_exempt
 def get_category_data(request):
 
-    cat_type = request.GET.get('type')
+    cat_type = request.GET.get('category')
 
     items = Item.objects.filter(category__choices=cat_type)
     data = {
     "data":[i.to_dict() for i in items]
     }
 
-    items = Item.objects.all()
-    context={'items':items}
-    print (render_to_string('store.html',context,request=request))
 
-    return JsonResponse(data)
+    context={'store_items':items}
+    filtered_html = render_to_string('items_list.html',context,request=request)
+
+    return JsonResponse({'fh':filtered_html,'type':cat_type})

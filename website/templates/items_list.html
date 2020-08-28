@@ -1,0 +1,40 @@
+
+  <div class="container items-row">
+        <h3 id='no_results' style='display:None'></h3>
+  <div class="row">
+
+    {% for item  in store_items %}
+    <div class="col-lg-4 items_container"  data-ctype='{{item.category}}'>
+      <div class="box-ele">
+        <img class='thumbnail' src="{{ item.productimage_set.all.0.image.url }}" alt="">
+        <div class="add-cart">
+          <button class="btn btn-info " type="button" name="button">
+            <a style='color:white' href="{% url 'SKART:detail' item.id %}">
+            <i class="fa fa-eye cart-icon fa-2x" aria-hidden="true"></i>
+            </a>
+
+            </button>
+          <button  data-product="{{item.id}}" data-action='add' type="button" class="btn btn-info  add-cart-btn update-cart" name="button">
+            <i class="fa fa-cart-plus cart-icon fa-2x" aria-hidden="true"></i>
+          </button>
+
+        </div>
+
+        <hr>
+        <h4 class="product-name">{{item.name}}</h4>
+
+        <h4 class="product-price"><strong> &#8377;{{item.price }}</strong></h4>
+
+      </div>
+
+    </div>
+
+        {% endfor %}
+  </div>
+
+
+
+
+
+
+</div>
