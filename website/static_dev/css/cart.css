@@ -6,5 +6,39 @@
 .ct_btns{
   display:flex;
   justify-content:space-between;
-  
+
+}
+
+.ct_btns button{
+  border-radius: 50px !important;
+  font-weight: 500;
+}
+
+.cart-holder h2, .price-detail-header h3{
+  text-transform: uppercase;
+    font-weight: 500;
+    color: #523f3f;
+}
+/*
+{
+  text-transform: uppercase;
+    font-weight: 500;
+    color: #523f3f;
+} */
+
+.cart_btn_grp button:nth-child(1){
+
+   border-top-left-radius: 20px !important;
+   border-bottom-left-radius:20px !important;
+}
+
+.cart_btn_grp button:nth-child(3){
+
+   border-top-right-radius:  20px !important;
+   border-bottom-right-radius:20px !important;
+}
+
+.cart-pic{
+    border-color: #ddd;
+    border-style: groove;
 }

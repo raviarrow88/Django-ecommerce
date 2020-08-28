@@ -38,6 +38,7 @@ function sendRequest(req){
                   // encoded_url = encodeURIComponent()
                   window.history.pushState('','','?category='+data.type+'')
 
+
                 })
 }
 

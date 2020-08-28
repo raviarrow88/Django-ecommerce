@@ -115,8 +115,6 @@ def update_cart_items(request):
         elif data['action'] == 'remove':
             order_item.quantity -=1
 
-
-
         order_item.save()
 
         items = order.orderitem_set.all()
@@ -164,7 +162,7 @@ def get_category_data(request):
     "data":[i.to_dict() for i in items]
     }
 
-
+    print (request.path)
     context={'store_items':items}
     filtered_html = render_to_string('items_list.html',context,request=request)
 
