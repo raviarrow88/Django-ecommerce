@@ -55,10 +55,12 @@ def store(request):
         user_id = request.user.id
         res = get_cart_value(user_id)
 
-        query = request.GET.get('type')
+        query = request.GET.get('c')
+        print (query)
         if query:
             items = Item.objects.filter(category__choices=query)
-        items = Item.objects.all()
+        else:
+            items = Item.objects.all()
 
         context = {'store_items':items,'cart_value':res[1]}
     else:
@@ -147,8 +149,10 @@ def contact(request):
         form = ContactForm()
 
     context={'form':form,'cart_value':res[1]}
-
     return render(request,'contact.html',context)
+
+
+from django.template.loader import render_to_string
 
 @csrf_exempt
 def get_category_data(request):
@@ -159,5 +163,9 @@ def get_category_data(request):
     data = {
     "data":[i.to_dict() for i in items]
     }
+
+    items = Item.objects.all()
+    context={'items':items}
+    print (render_to_string('store.html',context,request=request))
 
     return JsonResponse(data)

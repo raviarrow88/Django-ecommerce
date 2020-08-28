@@ -35,7 +35,7 @@ function sendRequest(req){
 
                   console.log(data)
                   if ($('.items-row').length){
-                    window.history.pushState('','',new_url)
+                    window.history.pushState('','','?c='+data.data[0].category+'')
                     // window.location.replace(new_url)
 
                   if (data.data.length)
