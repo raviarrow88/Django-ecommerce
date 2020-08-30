@@ -157,6 +157,8 @@ def get_category_data(request):
 
     cat_type = request.GET.get('category')
 
+    print(request.path)
+
     items = Item.objects.filter(category__choices=cat_type)
     data = {
     "data":[i.to_dict() for i in items]
