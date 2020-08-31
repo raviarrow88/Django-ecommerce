@@ -1,8 +1,27 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load i18n %}
+
 {% block headextra %}
 <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs.css' %}">
 {% endblock headextra %}
+
+{% block breadcrumbs %}
+<div class="container brd_crumb_container">
+
+  <div class="breadcrumbs_links">
+      <a href="{% url 'SKART:store' %}">
+        <i class='fa fa-home'></i>{% trans 'Home' %}
+      </a>
+      <span> Shopping Cart </span>
+
+  </div>
+</div>
+
+{% endblock %}
+
+
 {%  block content %}
 
 <div class="container">
@@ -45,7 +64,7 @@
       </div>
       <div class="ct_btns" style="margin-top:20px">
           <button type="button" class="btn btn-primary btn-lg" style="border-radius:0px" name="button"> <a id='pl_order' href="{% url 'SKART:store' %}" style='color:white'><i class="fa fa-chevron-left" style="font-size:15px" aria-hidden="true"></i> CONTINUE SHOPPING </a> </button>
-          <button type="button" class="btn btn-primary btn-lg" style="border-radius:0px" name="button"> <a id='pl_order' href="{% url 'SKART:checkout' %}" style='color:white'>PLACE ORDER <i class="fa fa-chevron-right" style="font-size:15px" aria-hidden="true"></i></a> </button>
+          <button type="button" class="btn btn-primary btn-lg" style="border-radius:0px" name="button"> <a id='pl_order' href="{% url 'SKART:checkout' %}" style='color:white'> CHECKOUT <i class="fa fa-chevron-right" style="font-size:15px" aria-hidden="true"></i></a> </button>
 
       </div>
     </div>
