@@ -47,3 +47,14 @@
 .p-det h4{
   font-weight: 400
 }
+
+.place_order_container{
+  margin-top:15px;
+}
+
+.place_order_container button{
+  text-transform: uppercase;
+  border-radius: 50px;
+  font-size:20px;
+  font-weight: 400
+}

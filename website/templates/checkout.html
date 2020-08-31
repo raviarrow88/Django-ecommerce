@@ -30,8 +30,13 @@
     <div class="col-8 col-sm-8 col-md-8 col-ls-8">
       <div class="address cart-holder">
         <h4>Address</h4>
+        <hr>
         <form>
           <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputUsername">Title</label>
+              <input type="text" class="form-control" name="title" id="inputTitle" placeholder="Home/Office or other">
+            </div>
             <div class="form-group col-md-6">
               <label for="inputUsername">Name</label>
               <input type="text" class="form-control" name="name" id="inputName" placeholder="Name">
@@ -48,43 +53,30 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputCity">City</label>
-              <input type="text" class="form-control" name='city' id="inputCity">
+              <input type="text" class="form-control" name='city' id="inputCity" placeholder="Hyderbad">
             </div>
             <div class="form-group col-md-4">
               <label for="inputState">State</label>
-              <input type="text" class="form-control" name="state" value="" placeholder="Andhra Pradesh">
+              <input type="text" class="form-control" name="state" value="" placeholder="Andhra Pradesh" >
             </div>
             <div class="form-group col-md-2">
               <label for="inputZip">Zip</label>
-              <input type="text" class="form-control" name="zipcode" id="inputZip">
+              <input type="text" class="form-control" name="zipcode" id="inputZip" placeholder="520012">
             </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6 " >
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                  Home
-                </label>
-              </div>
-              </div>
-              <div class="form-check col-md-6">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                  Office
-                </label>
-              </div>
-
 
           </div>
 
-          <button type="submit" class="btn btn-success btn-lg btn-block">Continue</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block">Save</button>
         </form>
       </div>
 
     </div>
     <div class="col-4  col-sm-4 col-md-4 col-ls-4 ">
         {% include 'items_card.html' %}
+        <div class="place_order_container">
+          <button  class='btn btn-danger btn-block' type="button" name="button"> Place Order </button>
+        </div>
+
     </div>
 
     <div class="col-8 col-sm-8 col-md-8">
@@ -96,13 +88,13 @@
             <div class="add_holder">
               <div class="add_section cart-holder ">
                 <span><p><input type="radio" name="" value="{{add.id}}">
-                {{add.address_type}}</p></span>
+                {{add.title}}</p></span>
                 {{ add.user.phone_number }},
                 {{ add.street_address}}
                 {{add.apartment_address}}
                 {{add.zipcode}}
 
-                
+
 
               </div>
 
