@@ -41,4 +41,9 @@
 .cart-pic{
     border-color: #ddd;
     border-style: groove;
+
+}
+
+.p-det h4{
+  font-weight: 400
 }

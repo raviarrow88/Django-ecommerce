@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+{% block headextra %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock headextra %}
 {%  block content %}
-
 <div class="container">
   <div class="row">
     <div class="col-8 col-sm-8 col-md-8 col-ls-8">
