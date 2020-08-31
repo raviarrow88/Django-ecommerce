@@ -1,0 +1,26 @@
+.breadcrumbs_links a i{
+  margin-right: 15px;
+}
+
+.breadcrumbs_links a {
+  margin-right: 8px;
+  color:black;
+  font-weight: 300;
+}
+
+
+.breadcrumbs_links a:hover{
+text-decoration: None
+}
+
+.breadcrumbs_links a:after {
+  content:"";
+  font-family: "FontAwesome";
+  font-size: 15px;
+  color:black;
+  padding-left:10px
+}
+
+.brd_crumb_container {
+  margin-top:20px;
+}

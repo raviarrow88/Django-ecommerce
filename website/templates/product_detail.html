@@ -1,22 +1,41 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% load django_bootstrap_breadcrumbs %}
 
 {% block headextra %}
 <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs.css' %}">
 <script type="text/javascript" src="{% static 'js/product_detail.js' %}" ></script>
+<script type="text/javascript" src="{% static 'js/get_category_wise_product.js' %}" ></script>
+
 {% endblock headextra %}
+
 {% block breadcrumbs %}
-    {{ block.super }}
+<div class="container brd_crumb_container">
+
+  <div class="breadcrumbs_links">
+      <a href="{% url 'SKART:store' %}">
+        <i class='fa fa-home'></i>{% trans 'Home' %}
+      </a>
+      <a class='drop_ele' href="#"> {{item.category}} </a>
+      <span> {{item.name}} </span>
+
+  </div>
+</div>
+
 
 {% endblock %}
 
+
+
 {% block content %}
-<!-- {% render_breadcrumbs %} -->
+
+
 
 <div class="container">
   <div class="product-container">
-      
+
       <div class="row my-3">
         <div class="">
           <div class="slider_wrapper">
