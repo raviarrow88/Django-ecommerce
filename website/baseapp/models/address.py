@@ -13,7 +13,7 @@ class Address(TimeStamp):
     street_address = models.CharField(max_length=250,null=False)
     apartment_address = models.CharField(max_length=250,null=False)
     zip = models.CharField(max_length=6,null=False)
-    address_type = models.CharField(max_length=1, choices=ADDRESS_TYPE)
+    address_type = models.CharField(max_length=10, choices=ADDRESS_TYPE)
 
     def __str__(self):
         return self.street_address
