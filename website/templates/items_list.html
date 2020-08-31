@@ -1,6 +1,17 @@
+  <head>
+    <script>
+      $(function () {
+        $('.pop_info').popover({
+          trigger:'hover'
+        })
+      })
+      </script>
 
+  </head>
   <div class="container items-row">
-        <h3 id='no_results' style='display:None'></h3>
+      <h3 id='no_results' style='display:None'></h3>
+
+
   <div class="row">
 
     {% for item  in store_items %}
@@ -8,13 +19,13 @@
       <div class="box-ele">
         <img class='thumbnail' src="{{ item.productimage_set.all.0.image.url }}" alt="">
         <div class="add-cart">
-          <button class="btn btn-info " type="button" name="button">
+          <button  class="btn btn-info pop_info" type="button" name="button" data-container="body" data-toggle="popover" data-placement="top" data-content='View Product'>
             <a style='color:white' href="{% url 'SKART:detail' item.id %}">
             <i class="fa fa-eye cart-icon fa-2x" aria-hidden="true"></i>
             </a>
 
             </button>
-          <button  data-product="{{item.id}}" data-action='add' type="button" class="btn btn-info  add-cart-btn update-cart" name="button">
+          <button  data-product="{{item.id}}" data-action='add' type="button" class="btn btn-info  add-cart-btn update-cart pop_info" name="button"data-container="body" data-toggle="popover" data-placement="top" data-content='Add To Cart' >
             <i class="fa fa-cart-plus cart-icon fa-2x" aria-hidden="true"></i>
           </button>
 
