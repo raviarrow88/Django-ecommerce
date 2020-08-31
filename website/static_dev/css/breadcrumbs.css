@@ -24,3 +24,8 @@ text-decoration: None
 .brd_crumb_container {
   margin-top:20px;
 }
+
+.brd_crumb_container span{
+  color:#a5a4a4;
+  font-weight: 300
+}

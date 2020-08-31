@@ -1,12 +1,30 @@
 {% extends "base.html" %}
 {% load bootstrap %}
+{% load i18n %}
 {% load static %}
 {% block headextra %}
 <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs.css' %}">
 
 {% endblock headextra %}
+{% block breadcrumbs %}
+<div class="container brd_crumb_container">
+
+  <div class="breadcrumbs_links">
+      <a href="{% url 'SKART:store' %}">
+        <i class='fa fa-home'></i>{% trans 'Home' %}
+      </a>
+      <span> Contact </span>
+
+  </div>
+</div>
+
+{% endblock %}
+
 
 {% block content %}
+
+
 
   <div class="container">
 
