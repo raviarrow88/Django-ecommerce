@@ -8,8 +8,8 @@ from .order import Order
 
 class Address(TimeStamp):
     title = models.CharField(max_length=255,unique=True)
-    user = models.ForeignKey(UserProfile,on_delete=models.SET_NULL,null=True,blank=True)
-    order = models.ForeignKey(Order,on_delete=models.SET_NULL,null=True,blank=True)
+    user = models.ForeignKey(UserProfile,on_delete=models.SET_NULL,null=True)
+    order = models.ForeignKey(Order,on_delete=models.SET_NULL,null=True)
     street_address = models.CharField(max_length=250,null=False)
     apartment_address = models.CharField(max_length=250,null=False)
     zip = models.CharField(max_length=6,null=False)
