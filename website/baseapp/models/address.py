@@ -14,6 +14,8 @@ class Address(TimeStamp):
     apartment_address = models.CharField(max_length=250,null=False)
     zip = models.CharField(max_length=6,null=False)
     address_type = models.CharField(max_length=10, choices=ADDRESS_TYPE)
+    state=models.CharField(max_length=255)
+    city=models.CharField(max_length=255)
 
     def __str__(self):
         return self.street_address

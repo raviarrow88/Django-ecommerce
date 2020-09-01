@@ -169,3 +169,37 @@ def get_category_data(request):
     filtered_html = render_to_string('items_list.html',context,request=request)
 
     return JsonResponse({'fh':filtered_html,'type':cat_type})
+
+from django.core.exceptions import ValidationError,FieldError,FieldDoesNotExist
+from django.db import IntegrityError
+
+def create_address(request):
+    if request.method == 'POST' or request.is_ajax():
+        try:
+            auth_user  = UserProfile.objects.get(user_id=request.user.id)
+            print(request.user.email)
+            address = Address.objects.create(
+            title=request.POST.get('title'),
+            user= auth_user,
+            street_address = request.POST.get('address'),
+            city=request.POST.get('city'),
+            state=request.POST.get('state'),
+            zip = request.POST.get('zipcode')
+            )
+            address.save()
+            return JsonResponse({"message":"Added SuccessFully"},status=200)
+
+        except ValidationError as e:
+            print ("v",e)
+            return JsonResponse({'Error':str(e)},status=404)
+
+        except FieldError as e:
+            print("F",e)
+            return JsonResponse({'Error':str(e)},status=404)
+        except IntegrityError as e:
+            print (e)
+            if 'UNIQUE constraint' in e.args[0]:
+                return JsonResponse({'Error':"Title already exists"},status=404)
+        except Exception as e:
+            print (e)
+            return JsonResponse({'Error':str(e)},status=404)

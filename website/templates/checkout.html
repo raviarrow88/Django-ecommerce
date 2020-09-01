@@ -5,7 +5,9 @@
 {% block headextra %}
 <link rel="stylesheet" href="{% static 'css/cart.css' %}">
 <link rel="stylesheet" href="{% static 'css/breadcrumbs.css' %}">
+<script type="text/javascript" src="{% static 'js/add_address.js' %}">
 
+</script>
 {% endblock headextra %}
 
 {% block breadcrumbs %}
@@ -31,7 +33,7 @@
       <div class="address cart-holder">
         <h4>Address</h4>
         <hr>
-        <form>
+        <form method='POST' id='save_address'>{% csrf_token %}
           <div class="form-row">
             <div class="form-group col-md-12">
               <label for="inputUsername">Title</label>
@@ -66,7 +68,7 @@
 
           </div>
 
-          <button type="submit" class="btn btn-success btn-lg btn-block">Save</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block"> Save </button>
         </form>
       </div>
 
@@ -105,10 +107,22 @@
         {% endfor %}
       </div>
 
+
     </div>
 
   </div>
 
+</div>
+
+<div id="userDialog" class="modal fade" tabindex="-1" role="dialog">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-body">
+     {% include "response_message.html" %}
+    </div>
+
+  </div>
+</div>
 </div>
 
 {% endblock %}
