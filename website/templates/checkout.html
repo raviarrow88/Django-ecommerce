@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load i18n %}
+{% load bootstrap %}
 
 {% block headextra %}
 <link rel="stylesheet" href="{% static 'css/cart.css' %}">
@@ -29,12 +30,17 @@
 {%  block content %}
 <div class="container">
   <div class="row">
+
+
+
+
     <div class="col-8 col-sm-8 col-md-8 col-ls-8">
       <div class="address cart-holder">
         <h4>Address</h4>
         <hr>
         <form method='POST' id='save_address'>{% csrf_token %}
-          <div class="form-row">
+            {{form|bootstrap }}
+          <!-- <div class="form-row">
             <div class="form-group col-md-12">
               <label for="inputUsername">Title</label>
               <input type="text" class="form-control" name="title" id="inputTitle" placeholder="Home/Office or other">
@@ -66,7 +72,7 @@
               <input type="text" class="form-control" name="zipcode" id="inputZip" placeholder="520012">
             </div>
 
-          </div>
+          </div> -->
 
           <button type="submit" class="btn btn-success btn-lg btn-block"> Save </button>
         </form>

@@ -34,6 +34,7 @@ def cart(request):
 
 
 from baseapp.models.address import Address
+from .forms import AddressForm
 
 def checkout(request):
     if request.user.is_authenticated:
@@ -43,8 +44,15 @@ def checkout(request):
 
         address = Address.objects.filter(user=profile)
 
+        if request.method =='POST':
+            form = AddressForm(request.POST or None)
+            if form.is_valid():
+                form.save()
+        else:
+            form = AddressForm()
 
-        context = {'address':address,'order':res[0],'cart_value':res[1]}
+
+        context = {'address':address,'order':res[0],'cart_value':res[1],'form':form}
 
     else:
         context={}
@@ -176,8 +184,13 @@ from django.db import IntegrityError
 def create_address(request):
     if request.method == 'POST' or request.is_ajax():
         try:
+            print (request.body.decode('utf-8'))
+
+            if request.POST['title']=='':
+                print ("No")
+
+
             auth_user  = UserProfile.objects.get(user_id=request.user.id)
-            print(request.user.email)
             address = Address.objects.create(
             title=request.POST.get('title'),
             user= auth_user,
@@ -197,9 +210,9 @@ def create_address(request):
             print("F",e)
             return JsonResponse({'Error':str(e)},status=404)
         except IntegrityError as e:
-            print (e)
+            print ('I',e.args,e)
             if 'UNIQUE constraint' in e.args[0]:
                 return JsonResponse({'Error':"Title already exists"},status=404)
         except Exception as e:
-            print (e)
+            print ('Ex',e)
             return JsonResponse({'Error':str(e)},status=404)
