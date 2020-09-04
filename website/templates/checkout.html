@@ -31,14 +31,25 @@
 <div class="container">
   <div class="row">
 
-
-
-
     <div class="col-8 col-sm-8 col-md-8 col-ls-8">
       <div class="address cart-holder">
-        <h4>Address</h4>
+        <h4>BILLING DETAIL</h4>
+        <small>All fields are required  <span style='color:red'>*</span>  </small>
         <hr>
         <form method='POST' id='save_address'>{% csrf_token %}
+                {% for field in form %}
+                  {% if form.errors %}
+                    {% for error in field.errors %}
+                      <p class="error-message">
+                        <strong style='color:red' >*{{ error|escape }}</strong>
+                      </p>
+                    {% endfor %}
+                  {% endif %}
+                  {% if field.help_text %}
+                      <p class="help">{{ field.help_text|safe }}</p>
+                  {% endif %}
+                {% endfor %}
+
             {{form|bootstrap }}
           <!-- <div class="form-row">
             <div class="form-group col-md-12">
@@ -74,7 +85,7 @@
 
           </div> -->
 
-          <button type="submit" class="btn btn-success btn-lg btn-block"> Save </button>
+          <button type="submit" class="btn btn-success btn-lg btn-block" value="Submit"> Save </button>
         </form>
       </div>
 
@@ -97,10 +108,10 @@
               <div class="add_section cart-holder ">
                 <span><p><input type="radio" name="" value="{{add.id}}">
                 {{add.title}}</p></span>
-                {{ add.user.phone_number }},
-                {{ add.street_address}}
-                {{add.apartment_address}}
-                {{add.zipcode}}
+                {{ add.phone_number }},
+                {{ add.street_address}},
+                {{add.apartment_address}},
+                {{add.zip}}
 
 
 

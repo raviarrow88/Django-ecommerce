@@ -44,12 +44,19 @@ def checkout(request):
 
         address = Address.objects.filter(user=profile)
 
+        initail_dict={'email':request.user.email,'id':profile.id}
+
         if request.method =='POST':
-            form = AddressForm(request.POST or None)
+            form = AddressForm(request.POST or None,initial=initail_dict)
             if form.is_valid():
-                form.save()
+                k = form.save(commit=False)
+                k.user = profile
+                k.order = res[0]
+                k.save()
+                return HttpResponseRedirect(reverse('SKART:checkout'))
+
         else:
-            form = AddressForm()
+            form = AddressForm(initial=initail_dict)
 
 
         context = {'address':address,'order':res[0],'cart_value':res[1],'form':form}
@@ -62,7 +69,6 @@ def store(request):
     if request.user.is_authenticated:
         user_id = request.user.id
         res = get_cart_value(user_id)
-
         query = request.GET.get('category')
         print (query)
         if query:
