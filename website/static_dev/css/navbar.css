@@ -115,3 +115,19 @@ color:#b4b7b9
   background-color: white;
   color:black !important
 }
+
+.src_box{
+  border-radius: 50px;
+  border-style: groove;
+    text-indent: 20px
+}
+
+.src_box::placeholder{
+  padding-left:10px;
+
+}
+
+.src_box:focus{
+  outline:none !important;
+
+}
