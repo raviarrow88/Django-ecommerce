@@ -19,7 +19,7 @@
         <img class='thumbnail' src="{{ item.productimage_set.all.0.image.url }}" alt="">
         <div class="add-cart">
           <button  class="btn btn-info pop_info" type="button" name="button" data-container="body" data-toggle="popover" data-placement="top" data-content='View Product'>
-            <a style='color:white' href="{% url 'SKART:detail' item.id %}">
+            <a style='color:white' href="{% url 'SKART:detail' item.slug %}">
             <i class="fa fa-eye cart-icon fa-2x" aria-hidden="true"></i>
             </a>
 

@@ -84,9 +84,9 @@ def store(request):
 
     return render(request,"store.html",context)
 
-def detail(request,id=None):
+def detail(request,slug=None):
     res = get_cart_value(request.user.id)
-    item_instance= get_object_or_404(Item,id=id)
+    item_instance= get_object_or_404(Item,slug=slug)
 
     context={"item":item_instance,'cart_value':res[1]}
     return render(request,"product_detail.html",context)

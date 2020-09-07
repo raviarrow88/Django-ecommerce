@@ -2,6 +2,7 @@ from django.db import models
 
 from .timestamp import TimeStamp
 from baseapp.helpers.choices import CATEGORY_CHOICES
+from django.template.defaultfilters import slugify 
 
 class Category(TimeStamp):
     choices = models.CharField(max_length=20,choices= CATEGORY_CHOICES,default='ELECTRONICS')
@@ -32,6 +33,11 @@ class Item(TimeStamp):
         "images":[ i.image.url for i in self.productimage_set.all() ]
         }
         return data
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
 class ProductImage(TimeStamp):
     item = models.ForeignKey(Item,on_delete=models.CASCADE)
