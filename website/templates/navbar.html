@@ -83,8 +83,12 @@
       {% if user.is_authenticated %}
       <!-- <button type="button" class='btn btn-danger' name="button"  >Logout</button> -->
       <div class="d-inline mx-2" style='padding-right:20px'>
-        <input class="src_box" type="text" name="item" value="" placeholder="Search">
-        <a class="d-inline" href="#" style='color:black;margin-right:13px'><i class="fa fa-search" aria-hidden="true"></i></a>
+        <form class="" action="{% url 'search' %}" method="get">
+        <input class="src_box" type="text" name="q" value="" placeholder="Search">
+          <a class="d-inline" href="" style='color:black;margin-right:13px'><i class="fa fa-search" aria-hidden="true"></i></a>
+        </form>
+
+
         <a class="d-inline" href="{% url 'SKART:cart' %}" style='color:black;font-size:20px'><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
         <div class="d-inline p-0" id='cart-total' >{{ cart_value }}</div>
       </div>

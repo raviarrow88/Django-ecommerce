@@ -222,3 +222,20 @@ def create_address(request):
         except Exception as e:
             print ('Ex',e)
             return JsonResponse({'Error':str(e)},status=404)
+
+
+
+from .documents import ItemDocument
+
+def search(request):
+    q = request.GET.get('q')
+    print (q)
+    if q:
+        items = ItemDocument.search().filter("term",title=q)
+    else:
+        items = ''
+
+    print ("i",items.to_queryset())
+    context={"store_items":items}
+
+    return render(request,"store.html",context)
