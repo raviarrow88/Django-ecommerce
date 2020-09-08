@@ -8,6 +8,14 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+    $('#src_icon').click(function(event){
+      var value = $('.src_box').val()
+      console.log(value)
+      $('#srch_form').append(value)
+      $('#srch_form').submit()
+      event.preventDefault()
+    })
+
     $('#catgory_sec').click(function() {
 
 
@@ -83,9 +91,9 @@
       {% if user.is_authenticated %}
       <!-- <button type="button" class='btn btn-danger' name="button"  >Logout</button> -->
       <div class="d-inline mx-2" style='padding-right:20px'>
-        <form class="" action="{% url 'search' %}" method="get">
+        <form id='srch_form' class="d-inline" action="{% url 'search' %}" method="get">
         <input class="src_box" type="text" name="q" value="" placeholder="Search">
-          <a class="d-inline" href="" style='color:black;margin-right:13px'><i class="fa fa-search" aria-hidden="true"></i></a>
+          <a class="d-inline" href="" style='color:black;margin-right:13px'><i id='src_icon' class="fa fa-search" aria-hidden="true"></i></a>
         </form>
 
 

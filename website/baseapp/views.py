@@ -231,11 +231,11 @@ def search(request):
     q = request.GET.get('q')
     print (q)
     if q:
-        items = ItemDocument.search().filter("term",title=q)
+        items = ItemDocument.search().filter("term",name=q)
     else:
         items = ''
 
-    print ("i",items.to_queryset())
+
     context={"store_items":items}
 
     return render(request,"store.html",context)
