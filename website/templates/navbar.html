@@ -88,8 +88,6 @@
 
     <div class=" mx-2 login-btn" role='group'>
 
-      {% if user.is_authenticated %}
-      <!-- <button type="button" class='btn btn-danger' name="button"  >Logout</button> -->
       <div class="d-inline mx-2" style='padding-right:20px'>
         <form id='srch_form' class="d-inline" action="{% url 'search' %}" method="get">
         <input class="src_box" type="text" name="q" value="" placeholder="Search">
@@ -102,9 +100,13 @@
       </div>
 
 
-      <a href="/accounts/logout/" class='btn btn-dark'>Logout</a>
+      {% if user.is_authenticated %}
+      <!-- <button type="button" class='btn btn-danger' name="button"  >Logout</button> -->
+
+
+        <a href="/accounts/logout/" class='btn btn-dark'>Logout</a>
       {% else %}
-      <button type="button" class='btn btn-outline-dark' name="button" data-toggle="modal" data-target="#exampleModalCenter" data-keyboard="false" data-backdrop="static" >LogIn/Register</button>
+          <button type="button" class='btn btn-outline-dark' name="button" data-toggle="modal" data-target="#exampleModalCenter" data-keyboard="false" data-backdrop="static" >LogIn/Register</button>
       {% endif %}
 
 

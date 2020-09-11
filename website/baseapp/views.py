@@ -78,7 +78,7 @@ def store(request):
 
         context = {'store_items':items,'cart_value':res[1]}
     else:
-        items=[]
+        items = Item.objects.all()
         context={'store_items':items,'cart_value':0}
 
 
