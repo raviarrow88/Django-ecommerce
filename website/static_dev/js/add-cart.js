@@ -1,5 +1,6 @@
 $(document).ready(function(){
 items = document.getElementsByClassName('update-cart')
+console.log(user)
 
 for(i=0;i < items.length;i++ ) {
   items[i].addEventListener('click',function(){
