@@ -7,8 +7,10 @@ for(i=0;i < items.length;i++ ) {
       var action = this.dataset.action
 
       if (user === 'AnonymousUser'){
-        console.log('not logged')
-        console.log(cart)
+
+
+        addCookieProduct(product_id,action)
+
       }
       else{
 
@@ -17,6 +19,34 @@ for(i=0;i < items.length;i++ ) {
     }
   })
 }
+
+
+function addCookieProduct(product_id,action){
+  console.log(product_id)
+  if (action == 'add'){
+    if (cart[product_id] == undefined){
+      cart[product_id] = {'quantity':1}
+    }
+    else{
+      cart[product_id]['quantity'] +=1
+    }
+  }
+
+if (action=='remove'){
+  cart[product_id]['quantity']-=1
+
+  if (cart[product_id]['quantity']<=0){
+    delete cart[product_id]
+  }
+
+}
+console.log(cart)
+
+document.cookie = 'cart='+ JSON.stringify(cart) + ";domain=;path=/"
+// location.reload()
+
+}
+
 
 async function update_or_create_cart(product_id,action) {
   // console.log(product_id,action)

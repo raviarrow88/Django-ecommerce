@@ -9,7 +9,7 @@ from customer.models import UserProfile
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from decimal import Decimal
 
 
 
@@ -24,12 +24,34 @@ def cart(request):
         items = order.orderitem_set.all()
 
         cart_value = sum([item.quantity for item in items])
-
-
         context = {'items':items,'order':order,'cart_value':cart_value}
+
     else:
+        cart = json.loads(request.COOKIES['cart'])
+        # {'1': {'quantity': 1}, '2': {'quantity': 1}}
         items=[]
-        context={'items':items}
+        order = {'get_no_items':0,'get_total_order_price':0,'get_cart_total':0,"get_delivery_fee":0}
+        if cart:
+            for i in cart:
+                order['get_no_items'] += cart[i]['quantity']
+                item = Item.objects.get(id=i)
+
+                order['get_total_order_price'] += item.price
+
+            if int (order['get_delivery_fee']) > 500:
+                order['get_delivery_fee'] = 0
+            else:
+                order['get_delivery_fee'] = 500
+
+                order['get_cart_total'] = (order['get_total_order_price']) + Decimal(order['get_delivery_fee'])
+
+            items = Item.objects.filter(id__in = cart.keys())
+
+        else:
+            order = {'get_no_items':0,'get_total_order_price':0,'get_cart_total':0,"get_delivery_fee":0}
+
+        context={'items':items,'order':order,'cart_value':order['get_no_items']}
+
     return render(request,"cart.html",context)
 
 
@@ -183,6 +205,10 @@ def get_category_data(request):
     filtered_html = render_to_string('items_list.html',context,request=request)
 
     return JsonResponse({'fh':filtered_html,'type':cat_type})
+
+
+
+
 
 from django.core.exceptions import ValidationError,FieldError,FieldDoesNotExist
 from django.db import IntegrityError
