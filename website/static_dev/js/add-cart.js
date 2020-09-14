@@ -1,15 +1,20 @@
 $(document).ready(function(){
 items = document.getElementsByClassName('update-cart')
-console.log(user)
-
+// console.log(user)
 for(i=0;i < items.length;i++ ) {
   items[i].addEventListener('click',function(){
       var product_id = this.dataset.product
       var action = this.dataset.action
 
+      if (user === 'AnonymousUser'){
+        console.log('not logged')
+        console.log(cart)
+      }
+      else{
 
       update_or_create_cart(product_id,action)
       console.log(product_id,action)
+    }
   })
 }
 
