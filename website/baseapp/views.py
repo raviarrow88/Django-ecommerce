@@ -10,7 +10,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from decimal import Decimal
-
+from baseapp.helpers.utils import get_cart_value
 
 
 
@@ -29,9 +29,11 @@ def cart(request):
     else:
         cart = json.loads(request.COOKIES['cart'])
         # {'1': {'quantity': 1}, '2': {'quantity': 1}}
+        print ("store_cart",cart)
         items=[]
         order = {'get_no_items':0,'get_total_order_price':0,'get_cart_total':0,"get_delivery_fee":0}
         if cart:
+            print ("cart_exists")
             for i in cart:
                 order['get_no_items'] += cart[i]['quantity']
                 item = Item.objects.get(id=i)
@@ -98,7 +100,12 @@ def store(request):
         context = {'store_items':items,'cart_value':res[1]}
     else:
         items = Item.objects.all()
-        context={'store_items':items,'cart_value':0}
+        cart = json.loads(request.COOKIES['cart'])
+        quantity = 0
+        for i in cart:
+            item = Item.objects.get(id=1)
+            quantity += cart[i]['quantity']
+        context={'store_items':items,'cart_value':quantity}
 
 
     return render(request,"store.html",context)
@@ -114,16 +121,7 @@ def login_cancel(request):
     return redirect("SKART:store")
 
 
-def get_cart_value(user_id):
-    profile = UserProfile.objects.get(user__id=user_id)
-    # print (profile)
-    order,created = Order.objects.get_or_create(user=profile)
 
-    items = order.orderitem_set.all()
-
-    cart_value = sum([item.quantity for item in items])
-
-    return order,cart_value
 
 
 

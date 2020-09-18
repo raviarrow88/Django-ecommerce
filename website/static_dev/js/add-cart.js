@@ -43,7 +43,7 @@ if (action=='remove'){
 console.log(cart)
 
 document.cookie = 'cart='+ JSON.stringify(cart) + ";domain=;path=/"
-// location.reload()
+location.reload()
 
 }
 
