@@ -21,9 +21,9 @@ def cart(request):
         # print (profile)
         order,created = Order.objects.get_or_create(user=profile)
 
-        items = order.orderitem_set.all()
+        items = [i.item for i in order.orderitem_set.all()]
 
-        cart_value = sum([item.quantity for item in items])
+        cart_value = sum([item.quantity for item in order.orderitem_set.all()])
         context = {'items':items,'order':order,'cart_value':cart_value}
 
     else:
@@ -35,7 +35,7 @@ def cart(request):
             for i in cart:
                 order['get_no_items'] += cart[i]['quantity']
                 item = Item.objects.get(id=i)
-
+                items.append(item)
                 order['get_total_order_price'] += item.price
 
             if int (order['get_delivery_fee']) > 500:
@@ -45,12 +45,9 @@ def cart(request):
 
                 order['get_cart_total'] = (order['get_total_order_price']) + Decimal(order['get_delivery_fee'])
 
-            items = Item.objects.filter(id__in = cart.keys())
+            items_q = Item.objects.filter(id__in=[i.id for i in items])
 
-        else:
-            order = {'get_no_items':0,'get_total_order_price':0,'get_cart_total':0,"get_delivery_fee":0}
-
-        context={'items':items,'order':order,'cart_value':order['get_no_items']}
+            context={'items':items_q,'order':order,'cart_value':order['get_no_items']}
 
     return render(request,"cart.html",context)
 

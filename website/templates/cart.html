@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load app_extras %}
 {% load staticfiles %}
+
 {% load i18n %}
 
 {% block headextra %}
@@ -31,25 +33,24 @@
         <h2>Mycart</h2>
         <hr>
         {% for item in items %}
-          
         <div class="items-container">
           <div class="cart-items">
-            <img class="cart-pic" src="{{ item.item.image.url }}" alt="">
+            <img class="cart-pic" src="{{ item.image.url }}" alt="">
             <div class="c-details">
               <div class="cart-prod-name">
-                <p>{{item.item.name}}</p>
+                <p>{{item.name}}</p>
               </div>
               <div class="cart-prod-cost">
-                <p>{{ item.item.price }}</p>
+                <p>{{ item.price }}</p>
               </div>
 
 
             </div>
             <div  style='padding-left:320px;padding-top:20px'>
               <div class="btn-group cart_btn_grp" role="group" aria-label="">
-                <button type="button" data-product="{{item.item.id}}" data-action='add' class="btn btn-secondary update-cart" style='border-radius:0px' ><i class="fa fa-plus" aria-hidden="true"></i></button>
-                <input type="text" name="" value={{item.quantity}} readonly class='text-center' style="width:30px">
-                <button type="button" data-product="{{item.item.id}}" data-action='remove' class="btn btn-secondary update-cart" style='border-radius:0px'><i class="fa fa-minus" aria-hidden="true"></i></button>
+                <button type="button" data-product="{{item.id}}" data-action='add' class="btn btn-secondary update-cart" style='border-radius:0px' ><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <input type="text" name="" value="{{item.id | get_quantity }}" readonly class='text-center' style="width:30px">
+                <button type="button" data-product="{{item.id}}" data-action='remove' class="btn btn-secondary update-cart" style='border-radius:0px'><i class="fa fa-minus" aria-hidden="true"></i></button>
               </div>
 
             </div>
