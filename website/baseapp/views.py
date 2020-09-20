@@ -181,17 +181,31 @@ from django.contrib import messages
 
 
 def contact(request):
-    res = get_cart_value(request.user.id)
-    if request.method=='POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Message Sent SuccessFully')
-            return HttpResponseRedirect(reverse('SKART:contact'))
+    if request.user.is_authenticated:
+        res = get_cart_value(request.user.id)
+        if request.method=='POST':
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Message Sent SuccessFully')
+                return HttpResponseRedirect(reverse('SKART:contact'))
+        else:
+            form = ContactForm()
+        quantity = res[1]
     else:
-        form = ContactForm()
+        form=ContactForm()
+        try:
+            cart = json.loads(request.COOKIES['cart'])
+        except:
+            cart={}
+        quantity = 0
+        for i in cart:
+            item = Item.objects.get(id=1)
+            quantity += cart[i]['quantity']
 
-    context={'form':form,'cart_value':res[1]}
+
+
+    context={'form':form,'cart_value':quantity}
     return render(request,'contact.html',context)
 
 
