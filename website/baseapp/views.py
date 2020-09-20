@@ -21,36 +21,46 @@ def cart(request):
         # print (profile)
         order,created = Order.objects.get_or_create(user=profile)
 
-        items = [i.item for i in order.orderitem_set.all()]
+        items = order.orderitem_set.all()
+
+
 
         cart_value = sum([item.quantity for item in order.orderitem_set.all()])
-        context = {'items':items,'order':order,'cart_value':cart_value}
-
+        # context = {'items':items,'order':order,'cart_value':cart_value}
     else:
-        cart = json.loads(request.COOKIES['cart'])
-        # {'1': {'quantity': 1}, '2': {'quantity': 1}}
-        print ("store_cart",cart)
+        try:
+            cart = json.loads(request.COOKIES['cart'])
+        except:
+            cart={}
         items=[]
         order = {'get_no_items':0,'get_total_order_price':0,'get_cart_total':0,"get_delivery_fee":0}
-        if cart:
-            print ("cart_exists")
-            for i in cart:
-                order['get_no_items'] += cart[i]['quantity']
-                item = Item.objects.get(id=i)
-                items.append(item)
-                order['get_total_order_price'] += item.price
+        for i in cart:
+            order['get_no_items'] += cart[i]['quantity']
+            item = Item.objects.get(id=i)
+            order['get_total_order_price'] = order['get_no_items'] *  item.price
+            item = {
+            'item':{
+            'id':item.id,
+            'price':item.price,
+            'name':item.name,
+            'quantity':cart[i]['quantity'],
+            'imageUrl': item.productimage_set.all()[0].image.url
+            }
+            }
 
-            if int (order['get_delivery_fee']) > 500:
-                order['get_delivery_fee'] = 0
-            else:
-                order['get_delivery_fee'] = 500
+            print (item)
+            items.append(item)
 
-                order['get_cart_total'] = (order['get_total_order_price']) + Decimal(order['get_delivery_fee'])
+        cart_value = order['get_no_items']
+        if int (order['get_total_order_price']) > 500:
+            order['get_delivery_fee'] = 0
+        else:
+            order['get_delivery_fee'] = 500
 
-            items_q = Item.objects.filter(id__in=[i.id for i in items])
+            order['get_cart_total'] = (order['get_total_order_price']) + Decimal(order['get_delivery_fee'])
 
-            context={'items':items_q,'order':order,'cart_value':order['get_no_items']}
 
+    context={'items':items,'order':order,'cart_value':cart_value}
     return render(request,"cart.html",context)
 
 
@@ -97,17 +107,21 @@ def store(request):
         else:
             items = Item.objects.all()
 
-        context = {'store_items':items,'cart_value':res[1]}
+        quantity = res[1]
+        # context = {'store_items':items,'cart_value':res[1]}
     else:
         items = Item.objects.all()
-        cart = json.loads(request.COOKIES['cart'])
+        try:
+            cart = json.loads(request.COOKIES['cart'])
+        except:
+            cart={}
         quantity = 0
         for i in cart:
             item = Item.objects.get(id=1)
             quantity += cart[i]['quantity']
-        context={'store_items':items,'cart_value':quantity}
 
 
+    context={'store_items':items,'cart_value':quantity}
     return render(request,"store.html",context)
 
 def detail(request,slug=None):

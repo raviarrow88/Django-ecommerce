@@ -16,3 +16,7 @@ class OrderItem(TimeStamp):
     @property
     def total_value(self):
         return self.quantity * self.item.price
+
+    @property
+    def get_quantity(self):
+        return self.quantity

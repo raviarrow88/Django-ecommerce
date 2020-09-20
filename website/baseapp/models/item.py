@@ -34,11 +34,15 @@ class Item(TimeStamp):
         }
         return data
 
+    def imageUrl(self):
+        return self.productimage_set.all()[0].image.url
+
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
-    
+
 
 class ProductImage(TimeStamp):
     item = models.ForeignKey(Item,on_delete=models.CASCADE)

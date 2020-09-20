@@ -36,11 +36,11 @@
               }
           }
       }
-      return null;
+      return cookieValue;
   }
 
     var cart = JSON.parse(getCookie('cart'));
-    
+
     if (cart == undefined){
       cart = {}
       console.log('Cart Created')

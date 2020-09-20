@@ -44,7 +44,7 @@ console.log(cart)
 
 // var now = new Date();
 document.cookie = 'cart='+ JSON.stringify(cart)  +  ";domain=;path=/"
-// location.reload()
+location.reload()
 
 }
 
