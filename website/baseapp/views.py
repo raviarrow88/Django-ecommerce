@@ -117,7 +117,7 @@ def store(request):
             cart={}
         quantity = 0
         for i in cart:
-            item = Item.objects.get(id=1)
+            item = Item.objects.get(id=i)
             quantity += cart[i]['quantity']
 
 
@@ -125,10 +125,23 @@ def store(request):
     return render(request,"store.html",context)
 
 def detail(request,slug=None):
-    res = get_cart_value(request.user.id)
     item_instance= get_object_or_404(Item,slug=slug)
+    if request.user.is_authenticated:
+        res = get_cart_value(request.user.id)
+        quantity = res[1]
+    else:
+        try:
+            cart=json.loads(request.COOKIES['cart'])
+        except:
+            cart={}
+        quantity=0
+        for i in cart:
+            item = Item.objects.get(id=i)
+            quantity += cart[i]['quantity']
 
-    context={"item":item_instance,'cart_value':res[1]}
+
+
+    context={"item":item_instance,'cart_value':quantity}
     return render(request,"product_detail.html",context)
 
 def login_cancel(request):
