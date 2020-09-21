@@ -6,9 +6,9 @@
 {% block headextra %}
 <link rel="stylesheet" href="{% static 'css/cart.css' %}">
 <link rel="stylesheet" href="{% static 'css/breadcrumbs.css' %}">
-<script type="text/javascript" src="{% static 'js/add_address.js' %}">
+<script type="text/javascript" src="{% static 'js/add_address.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
 
-</script>
 {% endblock headextra %}
 
 {% block breadcrumbs %}
@@ -52,7 +52,7 @@
 
             {{form|bootstrap }}
 
-          <button type="submit" class="btn btn-success btn-lg btn-block" value="Submit"> Save </button>
+          <button id='saveAddressBtn' type="submit" class="btn btn-success btn-lg btn-block" value="Submit"> Save </button>
         </form>
       </div>
 
@@ -60,7 +60,7 @@
     <div class="col-4  col-sm-4 col-md-4 col-ls-4 ">
         {% include 'items_card.html' %}
         <div class="place_order_container">
-          <button  class='btn btn-danger btn-block' type="button" name="button"> Place Order </button>
+          <button id='placeOrderBtn' class='btn btn-danger btn-block' type="button" name="button"> Place Order </button>
         </div>
           <br><br>
           <div class="cart-holder">

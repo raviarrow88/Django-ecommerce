@@ -93,8 +93,31 @@ def checkout(request):
         context = {'address':address,'order':res[0],'cart_value':res[1],'form':form}
 
     else:
-        context={}
+        form = AddressForm()
+        try:
+            cart=json.loads(request.COOKIES['cart'])
+        except:
+            cart = {}
+        order = {'get_no_items':0,'get_total_order_price':0,'get_cart_total':0,"get_delivery_fee":0}
+        for i in cart:
+            order['get_no_items'] += cart[i]['quantity']
+            item = Item.objects.get(id=i)
+            order['get_total_order_price'] = order['get_no_items'] *  item.price
+
+        cart_value = order['get_no_items']
+        if int (order['get_total_order_price']) > 500:
+            order['get_delivery_fee'] = 0
+        else:
+            order['get_delivery_fee'] = 500
+
+            order['get_cart_total'] = (order['get_total_order_price']) + Decimal(order['get_delivery_fee'])
+
+        context={'form':form,'order':order,'cart_value':cart_value,'address':None}
+        print (context)
     return render(request,"checkout.html",context)
+
+
+
 
 def store(request):
     if request.user.is_authenticated:
