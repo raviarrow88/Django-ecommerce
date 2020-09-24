@@ -39,5 +39,14 @@ def create_cart(request,cart):
     cart_value = sum([item.quantity for item in order.orderitem_set.all()])
 
     context={'items':items,'order':order,'cart_value':cart_value}
-    print (context)
     return context
+
+
+
+def get_cookie_cart_quantity(cart):
+    quantity=0
+    for i in cart:
+        item = Item.objects.get(id=i)
+        quantity += cart[i]['quantity']
+
+    return quantity

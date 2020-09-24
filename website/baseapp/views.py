@@ -10,7 +10,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from decimal import Decimal
-from baseapp.helpers.utils import get_cart_value,create_cart
+from baseapp.helpers.utils import get_cart_value,create_cart,get_cookie_cart_quantity
 
 
 
@@ -151,10 +151,7 @@ def store(request):
             cart = json.loads(request.COOKIES['cart'])
         except:
             cart={}
-        quantity = 0
-        for i in cart:
-            item = Item.objects.get(id=i)
-            quantity += cart[i]['quantity']
+        quantity = get_cookie_cart_quantity(cart)
 
 
     context={'store_items':items,'cart_value':quantity}
@@ -170,11 +167,7 @@ def detail(request,slug=None):
             cart=json.loads(request.COOKIES['cart'])
         except:
             cart={}
-        quantity=0
-        for i in cart:
-            item = Item.objects.get(id=i)
-            quantity += cart[i]['quantity']
-
+        quantity = get_cookie_cart_quantity(cart)
 
 
     context={"item":item_instance,'cart_value':quantity}
@@ -247,11 +240,7 @@ def contact(request):
             cart = json.loads(request.COOKIES['cart'])
         except:
             cart={}
-        quantity = 0
-        for i in cart:
-            item = Item.objects.get(id=1)
-            quantity += cart[i]['quantity']
-
+        quantity = get_cookie_cart_quantity(cart)
 
 
     context={'form':form,'cart_value':quantity}
@@ -272,7 +261,6 @@ def get_category_data(request):
     "data":[i.to_dict() for i in items]
     }
 
-    print (request.path)
     context={'store_items':items}
     filtered_html = render_to_string('items_list.html',context,request=request)
 
