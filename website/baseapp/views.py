@@ -10,7 +10,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from decimal import Decimal
-from baseapp.helpers.utils import get_cart_value
+from baseapp.helpers.utils import get_cart_value,create_cart
 
 
 
@@ -26,6 +26,7 @@ def cart(request):
 
 
         cart_value = sum([item.quantity for item in order.orderitem_set.all()])
+
         # context = {'items':items,'order':order,'cart_value':cart_value}
     else:
         try:
@@ -43,9 +44,10 @@ def cart(request):
             'id':item.id,
             'price':item.price,
             'name':item.name,
-            'quantity':cart[i]['quantity'],
+
             'imageUrl': item.productimage_set.all()[0].image.url
-            }
+            },
+            'quantity':cart[i]['quantity'],
             }
 
             print (item)
@@ -119,12 +121,23 @@ def checkout(request):
 
 
 
+
 def store(request):
     if request.user.is_authenticated:
+        cart = json.loads(request.COOKIES['cart'])
+
+
+        if bool(cart):
+            context = create_cart(request,cart)
+            response = render(request,'cart.html',context)
+            response.delete_cookie('cart')
+            return response
+
+
         user_id = request.user.id
         res = get_cart_value(user_id)
         query = request.GET.get('category')
-        print (query)
+
         if query:
             items = Item.objects.filter(category__choices=query)
         else:

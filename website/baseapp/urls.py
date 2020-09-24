@@ -12,5 +12,6 @@ path('detail/<slug:slug>/',detail,name='detail'),
 path('update_cart/',update_cart_items,name='update-cart-items'),
 path('contact/',contact,name='contact'),
 path('category/',get_category_data,name='get_category_data'),
-path('create_address_api/',create_address,name='create_address_api')
+path('create_address_api/',create_address,name='create_address_api'),
+
 ]

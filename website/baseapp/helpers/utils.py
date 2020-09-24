@@ -20,3 +20,24 @@ def get_cart_value(user_id):
     cart_value = sum([item.quantity for item in items])
 
     return order,cart_value
+
+
+
+def create_cart(request,cart):
+    # {"1":{"quantity":2},"2":{"quantity":1}}
+
+    profile= UserProfile.objects.get(user__id=request.user.id)
+    order,created = Order.objects.get_or_create(user=profile)
+    for i in cart:
+        item = Item.objects.get(id=i)
+
+        order_item,created = OrderItem.objects.get_or_create(item=item,order=order)
+        order_item.quantity += cart[i]['quantity']
+        order_item.save()
+
+    items = order.orderitem_set.all()
+    cart_value = sum([item.quantity for item in order.orderitem_set.all()])
+
+    context={'items':items,'order':order,'cart_value':cart_value}
+    print (context)
+    return context
