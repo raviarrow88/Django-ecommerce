@@ -9,18 +9,18 @@ $(document).ready(function(){
   else {}
 
   $("#save_address,#placeOrderBtn").click(function(event){
-    event.preventDefault()
+if (user == 'AnonymousUser'){
+  event.preventDefault()
 
     setTimeout(function(){
 
-          if (user == 'AnonymousUser'){
             $('#loginModal').modal({
               backdrop: 'static',
                 keyboard: false
             })
-          }
-    },1000);
 
+    },1000);
+}
 
   })
 });
