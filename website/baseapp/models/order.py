@@ -7,8 +7,10 @@ from .item import Item
 
 class Order(TimeStamp):
     user =models.ForeignKey(UserProfile,on_delete=models.SET_NULL,null=True,blank=True)
-    complete = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
     delivery_charge = models.IntegerField(default=40,blank=False)
+    transaction_id = models.CharField(max_length=255,null=True)
+
     def __str__(self):
         return str(self.id)
 
