@@ -52,20 +52,30 @@ def get_line_items(request):
 @csrf_exempt
 def createCheckoutSession(request):
 
+
     if request.method=='GET':
         domain_url='http://localhost:8000/'
         stripe.api_key= settings.STRIPE_SECRET_KEY
 
+        profile = UserProfile.objects.get(user__id=request.user.id)
+
+
         try:
+            customer = stripe.Customer.retrieve(profile.stripe_id)
+            print (customer)
             profile = UserProfile.objects.get(user__id=request.user.id)
             checkoutSession = stripe.checkout.Session.create(
             success_url =domain_url+'success?session_id={CHECKOUT_SESSION_ID}',
             cancel_url =domain_url+'cancelled/',
             payment_method_types = ['card'],
+            billing_address_collection='required',
             mode='payment',
             line_items= get_line_items(request)[0],
             # customer_email = request.user.email,
+            # shipping = customer.shipping,
             customer= profile.stripe_id,
+
+
             )
 
 

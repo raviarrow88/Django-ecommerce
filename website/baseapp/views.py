@@ -89,12 +89,15 @@ def checkout(request):
                 stripe.api_key= settings.STRIPE_SECRET_KEY
                 Customer = stripe.Customer.modify(
                 profile.stripe_id,
-                shipping={
-                'name':profile.user.first_name,
-                'address':{
-                "line1":"b2 strt"
+                address={
+                "city":k.city,
+                "country":"IN",
+                "line1":k.street_address,
+                "line2":k.apartment_address,
+                "postal_code":k.zip,
+                "state":k.state
                 }
-                }
+                
                 )
 
                 return HttpResponseRedirect(reverse('SKART:checkout'))
