@@ -8,7 +8,6 @@ from .order import Order
 from django.core.validators import RegexValidator
 
 class Address(TimeStamp):
-    title = models.CharField(max_length=255,unique=True)
     user = models.ForeignKey(UserProfile,on_delete=models.SET_NULL,null=True)
     order = models.ForeignKey(Order,on_delete=models.SET_NULL,null=True,blank=False)
     street_address = models.CharField(max_length=250,null=False,blank=False,verbose_name='Address1')

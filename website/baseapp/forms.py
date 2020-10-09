@@ -11,13 +11,12 @@ from .models.address import Address
 class AddressForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Eg:Home/Office'}))
     name = forms.CharField()
-    email = forms.EmailField()
 
     class Meta:
         model=Address
-        fields = ('title','name','phone_number','street_address','apartment_address','city','state','zip','email')
+        fields = ('title','name','phone_number','street_address','apartment_address','city','state','zip',)
 
-    def __init__(self,*args,**kwargs):
-        super(AddressForm,self).__init__(*args,**kwargs)
-
-        self.fields['email'].disabled=True
+    # def __init__(self,*args,**kwargs):
+    #     super(AddressForm,self).__init__(*args,**kwargs)
+    #
+    #     self.fields['email'].disabled=True

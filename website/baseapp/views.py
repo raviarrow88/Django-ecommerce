@@ -8,11 +8,10 @@ from baseapp.models.item import Item
 from customer.models import UserProfile
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+import json,stripe
 from decimal import Decimal
 from baseapp.helpers.utils import get_cart_value,create_cart,get_cookie_cart_quantity
-
-
+from django.conf import settings
 
 def cart(request):
     if request.user.is_authenticated:
@@ -86,6 +85,18 @@ def checkout(request):
                 k.user = profile
                 k.order = res[0]
                 k.save()
+
+                stripe.api_key= settings.STRIPE_SECRET_KEY
+                Customer = stripe.Customer.modify(
+                profile.stripe_id,
+                shipping={
+                'name':profile.user.first_name,
+                'address':{
+                "line1":"b2 strt"
+                }
+                }
+                )
+
                 return HttpResponseRedirect(reverse('SKART:checkout'))
 
         else:
@@ -123,9 +134,11 @@ def checkout(request):
 
 
 def store(request):
-    if request.user.is_authenticated:
+    try:
         cart = json.loads(request.COOKIES['cart'])
-
+    except:
+        cart={}
+    if request.user.is_authenticated:
 
         if bool(cart):
             context = create_cart(request,cart)
@@ -147,10 +160,7 @@ def store(request):
         # context = {'store_items':items,'cart_value':res[1]}
     else:
         items = Item.objects.all()
-        try:
-            cart = json.loads(request.COOKIES['cart'])
-        except:
-            cart={}
+
         quantity = get_cookie_cart_quantity(cart)
 
 

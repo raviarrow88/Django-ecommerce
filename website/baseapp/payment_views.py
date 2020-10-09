@@ -12,6 +12,7 @@ import stripe
 @csrf_exempt
 def stripeConfig(request):
     if request.method=='GET':
+
         stripe_config = {'publicKey':settings.STRIPE_PUBLISHABLE_KEY}
         return JsonResponse(stripe_config,safe=False)
 
@@ -56,13 +57,15 @@ def createCheckoutSession(request):
         stripe.api_key= settings.STRIPE_SECRET_KEY
 
         try:
+            profile = UserProfile.objects.get(user__id=request.user.id)
             checkoutSession = stripe.checkout.Session.create(
             success_url =domain_url+'success?session_id={CHECKOUT_SESSION_ID}',
             cancel_url =domain_url+'cancelled/',
             payment_method_types = ['card'],
             mode='payment',
             line_items= get_line_items(request)[0],
-            customer_email = request.user.email,
+            # customer_email = request.user.email,
+            customer= profile.stripe_id,
             )
 
 

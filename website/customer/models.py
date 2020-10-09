@@ -22,6 +22,7 @@ class UserProfile(TimeStamp):
 
     fb_profile = models.URLField(max_length=255,null=True,blank=True,default=None)
     gmail_profile = models.URLField(max_length=255,null=True,blank=True,default=None)
+    stripe_id = models.CharField(max_length=255,null=True,blank=True,verbose_name='Customer Stripe ID')
 
 
 
@@ -29,6 +30,8 @@ class UserProfile(TimeStamp):
         return str(self.id)
 
 
+from django.conf import settings
+import stripe
 
 @receiver(user_signed_up)
 def create_user_profile(request,user,sociallogin=None,**kwargs):
@@ -36,6 +39,18 @@ def create_user_profile(request,user,sociallogin=None,**kwargs):
         new_user = User.objects.get(email=user.email)
         avatar_url = sociallogin.account.get_avatar_url()
         user_profile,created = UserProfile.objects.get_or_create(user=new_user,avatar=avatar_url)
+
+        if not user_profile.stripe_id:
+            stripe.api_key= settings.STRIPE_SECRET_KEY
+            st_customer = stripe.Customer.create(
+            name=new_user.first_name,
+            email=new_user.email,
+            )
+            user_profile.stripe_id = st_customer.id
+            user_profile.save()
+
+
+
         if sociallogin.account.provider =='google':
             new_user = User.objects.filter(email=user.email)[0]
             profile = UserProfile.objects.filter(user=new_user)[0]
