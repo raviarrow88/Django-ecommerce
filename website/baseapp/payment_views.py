@@ -27,7 +27,7 @@ def get_line_items(request):
 
     items = list(order.orderitem_set.all())
 
-    print (items)
+
     line_items=[]
     lt= {}
     total = 0
@@ -41,9 +41,16 @@ def get_line_items(request):
         line_items.append(lt.copy())
 
     if int(total) < 500:
-        total +=500
+        total +=40*100
+        lt['amount'] = int(total)
+        lt['quantity'] = 1
+        lt['currency'] ='inr'
+        lt['name'] = 'Delivery Fee'
+        line_items.append(lt.copy())
 
-    print(line_items,str(total))
+
+    print (items)
+
     return line_items,str(total)
 
 
@@ -62,17 +69,14 @@ def createCheckoutSession(request):
 
         try:
             customer = stripe.Customer.retrieve(profile.stripe_id)
-            print (customer)
+            # print (customer)
             profile = UserProfile.objects.get(user__id=request.user.id)
             checkoutSession = stripe.checkout.Session.create(
             success_url =domain_url+'success?session_id={CHECKOUT_SESSION_ID}',
             cancel_url =domain_url+'cancelled/',
             payment_method_types = ['card'],
-            billing_address_collection='required',
             mode='payment',
             line_items= get_line_items(request)[0],
-            # customer_email = request.user.email,
-            # shipping = customer.shipping,
             customer= profile.stripe_id,
 
 
