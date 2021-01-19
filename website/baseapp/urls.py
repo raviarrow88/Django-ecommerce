@@ -1,7 +1,7 @@
 
 from django.urls import path
 from .views import cart,checkout,store,detail,update_cart_items,contact,get_category_data,create_address
-from .payment_views import stripeConfig,createCheckoutSession,paymentSuccess,paymentCancelled
+from .payment_views import stripeConfig,createCheckoutSession,paymentSuccess,paymentCancelled,test_amit
 
 urlpatterns = [
 # path('',login,name='login'),
@@ -19,7 +19,7 @@ path('create_address_api/',create_address,name='create_address_api'),
 path('config/',stripeConfig),
 path('create_checkout_session/',createCheckoutSession),
 path('success/',paymentSuccess),
-path('cancelled/',paymentCancelled)
+path('cancelled/',paymentCancelled),
 
 
 ]

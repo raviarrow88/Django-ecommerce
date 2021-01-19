@@ -28,6 +28,7 @@ def cart(request):
 
         # context = {'items':items,'order':order,'cart_value':cart_value}
     else:
+
         try:
             cart = json.loads(request.COOKIES['cart'])
         except:
@@ -62,6 +63,7 @@ def cart(request):
 
 
     context={'items':items,'order':order,'cart_value':cart_value}
+    print (context)
     return render(request,"cart.html",context)
 
 
@@ -97,7 +99,7 @@ def checkout(request):
                 "postal_code":k.zip,
                 "state":k.state
                 }
-                
+
                 )
 
                 return HttpResponseRedirect(reverse('SKART:checkout'))
