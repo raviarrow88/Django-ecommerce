@@ -1,7 +1,7 @@
 
 from django.urls import path
 from .views import cart,checkout,store,detail,update_cart_items,contact,get_category_data,create_address
-from .payment_views import stripeConfig,createCheckoutSession,paymentSuccess,paymentCancelled,test_amit
+from .payment_views import stripeConfig,createCheckoutSession,paymentSuccess,paymentCancelled
 
 urlpatterns = [
 # path('',login,name='login'),

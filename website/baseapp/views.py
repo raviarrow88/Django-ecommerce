@@ -244,7 +244,9 @@ def contact(request):
             form = ContactForm(request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Message Sent SuccessFully')
+                # messages.set_level(request, messages.SUBMIT)
+                messages.success(request, "Message Submitted SuccessFully", extra_tags='submit_form')
+
                 return HttpResponseRedirect(reverse('SKART:contact'))
         else:
             form = ContactForm()
